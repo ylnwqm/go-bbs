@@ -5,7 +5,7 @@
 Go Bbs 是一个基于 Beego 开发的可切换模板的 BBS 社交博客系统。它安装简单便捷，页面简介优美。前端是HTML+JS+CSS，不需要掌握一些前端技术栈也能轻松自定义页面。
 
 ## 官网
-htts://go-bbs.com/
+http://go-bbs.com/
 
 ## DEMO 
 https://nihongdengxia.com/
