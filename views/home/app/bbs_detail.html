@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{$.SeoTitle}}</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/static/app/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/app/css/community.css" rel="stylesheet" type="text/css">
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YbILrRYZIl1t07oBWTdspsTkGUFCVebFGrvfMxtkdU4',{api_host:'https://app.posthog.com'})
+</script>
+</head>
+<body>
+    
+    <section class="aui-flexView">
+      <header class="aui-navBar aui-navBar-fixed">
+         <a href="javascript:history.go(-1);" class="aui-navBar-item">
+             <i class="icon ">
+                 <svg t="1620971982591" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="2990" fill="#ffffff"></path></svg>
+             </i>
+         </a>
+         <div class="aui-center">
+             <span class="aui-center-title">{{$.SeoTitle}}</span>
+         </div>
+         <a href="javascript:;" class="aui-navBar-item">
+             <i class="icon icon-sys"><svg t="1620965733846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2990" fill="#ffffff"></path><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2991" fill="#ffffff"></path><path d="M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2992" fill="#ffffff"></path></svg></i>
+         </a>
+     </header>
+
+
+        <section class="aui-scrollView">
+            <!-- <div class="aui-news-list">
+                <a href="#" class="aui-flex b-line fix-header-style">
+                    <div class="topic-user-img">
+                        <img src="images/pd-001.png" alt>
+                    </div>
+                    <div class="topic-user-box">
+                        <h3>职业第三者</h3>
+                        <h4>
+                            <em>2021年2月3日 14:24:29</em>
+                            <em class="topic-h4-point">·</em>
+                            <em>发起话题</em>
+                        </h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="topic-aui-flex-box">
+                        <div class="topic-title">
+                            <p>成长到现在，在无数次的主动与被动的比较中,普通人要如何度过这一生？</p>
+                            <em class="focus">+关注</em>
+                            <div style="clear: both;"></div>
+                        </div>
+                        <h4>
+                            <em>956人关注</em>
+                            <em class="topic-h4-point">·</em>
+                            <em>243.9万次浏览</em>
+                        </h4>
+                        <p>成长到现在，在无数次的主动与被动的比较中，越来越认清了自己普普通通的事实，不是天才，生来并非富二代，大家想怎样度过自己短暂的一生呢？</p>
+                    </div>
+                </a>
+            </div> -->
+
+            <div class="divHeight b-line"></div>
+
+            <div>
+                <div class="cl-tabpage-cont__wrap">
+                    <div class="aui-news-list cl-tabpage-item active-content" style="display: none;">
+                        {{range $key ,$value := $.Data}}
+
+                            <a href="/bbs/detail/{{$value.Id}}.html">
+                                <div class="aui-flex fix-header-style">
+                                    <div class="topic-user-img">
+                                        <object>
+                                            <a href="/user/{{$value.Customer.Id}}">
+                                                <img src="{{$value.Customer.Image}}" alt>
+                                            </a>
+                                        </object>
+                                    </div>
+                                    <div class="topic-user-box">
+                                        <h3>
+                                            <object>
+                                                <a href="/user/{{$value.Customer.Id}}">{{$value.Customer.Username}}</a>
+                                            </object>
+                                        </h3>
+                                        <h4>
+                                            <em>{{TemlpateTime $value.Created}}</em>
+                                        </h4>
+                                    </div>
+                                    <div class="topic-user-box">
+                                        <em style="float: right;">
+                                            <i class="icon icon-sys">
+                                                <svg t="1620965733846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2990"></path><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2991"></path><path d="M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2992"></path></svg>
+                                            </i>
+                                        </em>
+                                    </div>
+                                </div>
+                                <div class="aui-flex topic-content">
+                                    {{if gt $value.TopicId 0}}
+                                    <em>
+                                        <object>
+                                            <a href="/topic/detail/{{$value.TopicId}}.html">{{$value.Topic.Content}}</a>
+                                        </object>       
+                                    </em>
+                                    {{end}}
+                                    <p>
+                                        {{str2html $value.Content}}
+                                    </p>
+                                    {{if gt ($value.Images|len) 0}}
+                                        <ul>
+                                            {{if gt ($value.Images|len) 1}}
+                                                {{range $k,$v := $value.Images}}
+                                                <li>
+                                                    <div>
+                                                        <img src="{{$v.Url}}"  data-index="{{$v.Id}}">
+                                                    </div>
+                                                </li>
+                                                {{end}}
+                                            {{else}}
+                                                {{range $k,$v := $value.Images}}
+                                                <li class="single">
+                                                    <div>
+                                                        <img src="{{$v.Url}}"  data-index="{{$v.Id}}">
+                                                    </div>
+                                                </li>
+                                                {{end}}
+                                            {{end}}
+                                        </ul>
+                                    {{end}}
+                                    
+                                    
+                                </div>
+                                <div class="b-line topic-bottom">
+                                    <ul>
+                                        <li>
+                                            <i class="topic-icon">
+                                                {{if eq $value.IsLike false}}
+                                                <img src="/static/app/images/like.png">
+                                                {{else}}
+                                                <img src="/static/app/images/liked.png">
+                                                {{end}}
+                                                <em>{{$value.Like}}</em>
+                                            </i>
+                                            
+                                        </li>
+                                        <li>
+                                            <i class="topic-icon">
+                                                <img src="/static/app/images/comment.png">
+                                                <em>{{$value.Review}}</em>
+                                            </i>
+                                        </li>
+                                        <li>
+                                            <i class="topic-icon">
+                                                <img src="/static/app/images/forward.png">
+                                                <em>230</em>
+                                            </i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </a>
+                        {{end}}
+                    </div>
+                    <div class="aui-news-list cl-tabpage-item" style="display: none;">
+                        
+                    </div>
+                </div>
+               
+            </div>
+        </section>
+
+    </section>
+</body>
+</html>
+<script type="text/javascript" src="/static/app/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/app/js/slider.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.cl-tabpage-title .cl-tabpage-item').click(function(){
+            indexC = $(this).index();
+            console.log(indexC)
+            $(this).addClass('active-title').siblings().removeClass('active-title');
+            $('.cl-tabpage-cont__wrap .cl-tabpage-item').eq(indexC).addClass('active-content').siblings().removeClass('active-content');
+        })
+    });
+</script>
+
+<script type="text/javascript" src="/static/app/js/fastclick.js"></script>
+<script type="text/javascript" src="/static/app/js/imageViewer.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        FastClick.attach(document.body);
+
+        function getElement(index) {
+            // 可以不返回任何一个值，仅仅传入一个空函数指明要开启渐变动画
+            return document.getElementById('img' + (index + 1));
+        }
+
+        // 图片对象说明:
+        // thumbnail: 缩略图的链接(非必传)
+        // url: 原图的链接(必传)
+        var images = [
+            {url: 'images/demo.jpg'},
+            {url: 'images/demo.jpg'},
+            {url: 'images/demo.jpg'},
+        ];
+        window.imageViewer = new ImageViewer(images, {
+            container: 'body',
+            enableScale: true,
+            enableTapClose: true,
+            startIndex: 0,
+            fadeInFn: getElement,
+            fadeOutFn: getElement,
+            // headerRender: function () {
+            //     setTimeout(function () {
+            //         document.getElementById('close').addEventListener('click', function () {
+            //             imageViewer.close();
+            //         }, false);
+            //     }, 0);
+            //     return '<div id="close">关闭</div>';
+            // },
+            footerRender: function () {
+                return '<span class="number-current"></span>/<span class="number-total"></span>';
+            },
+            beforeSwipe: function (current) {
+                console.info('current-before: ' + current);
+            },
+            afterSwipe: function (current) {
+                console.info('current-after: ' + current);
+            },
+            swipeLastLeft: function (imageViewer, distance) {
+                console.log('swipeLastLeft', distance);
+                // if (distance > 50) {
+                //     imageViewer.setImageOption([{
+                //         thumbnail: 'thumbnails/6.jpg',
+                //         url: 'images/6.jpg'
+                //     }]);
+                //     return true;
+                // }
+            },
+            swipeFirstRight: function (imageViewer, distance) {
+                console.log('swipeFirstRight', distance);
+                // if (distance > 30) {
+                //     imageViewer.setImageOption([
+                //         {thumbnail: 'thumbnails/7.jpg', url: 'images/7.jpg'},
+                //         {thumbnail: 'thumbnails/8.jpg', url: 'images/8.jpg'}
+                //     ]);
+                //     return true;
+                // }
+            }
+        });
+
+        // document.getElementsByClassName('cl')[0].addEventListener('click', function (event) {
+        //     event.stopPropagation();
+        //     event.preventDefault()
+        //     var index = event.target.getAttribute('data-index');
+        //     if (index) {
+        //         imageViewer.open(parseInt(index));
+        //         // imageViewer.open(0);
+        //     }
+        // }, false);
+    }, false);
+
+    $('img').click(function(e){
+        //e.stopPropagation()
+        e.preventDefault()
+        console.log(11);
+        var index = event.target.getAttribute('data-index');
+            if (index) {
+                imageViewer.open(parseInt(index));
+                // imageViewer.open(0);
+            }
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        
+    })
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NGY93CNPH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NGY93CNPH2');
+</script>
+<!-- <script data-ad-client="ca-pub-1340648321287998" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+<script>
+    (function(){
+    var el = document.createElement("script");
+    el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?85dce07b9bb9fd6b134a8975fe39b9194bb1dccc9718f2198da85b7cc9df25a765e0a2ada1d5e86b11e7de7c1a83287d04743a02fd1ee8dd8558a8cad50e91cb354f8c6f3f78e5fd97613c481f678e6d";
+    el.id = "ttzz";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(el, s);
+    })(window)
+    </script>

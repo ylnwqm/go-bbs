@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>大厅 - 霓虹灯下社区</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/static/app/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/app/css/community.css" rel="stylesheet" type="text/css">
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YbILrRYZIl1t07oBWTdspsTkGUFCVebFGrvfMxtkdU4',{api_host:'https://app.posthog.com'})
+</script>
+</head>
+<body>
+    
+    <section class="aui-flexView">
+        <header class="aui-navBar aui-navBar-fixed">
+            <a href="javascript:history.go(-1);" class="aui-navBar-item">
+                <!-- <i class="icon ">
+                    <svg t="1620971982591" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="2990" fill="#2c2c2c"></path></svg>
+                </i> -->
+            </a>
+            <div class="aui-center search">
+                <input type="text" placeholder="文学中有趣的吐槽">
+                <!-- <span class="aui-center-title">话题</span> -->
+            </div>
+            <a href="javascript:;" class="aui-navBar-item topic-icon">
+                <img src="/static/app/images/message.png">
+           </a>
+            
+        </header>
+        <div class="aui-navBar aui-navBar-fixed cl-tabpage-title">
+            <div class="tab cl-tabpage-item active-title">热门</div>
+            <div class="tab cl-tabpage-item">最新</div>
+        </div>
+
+
+        <section class="aui-scrollView">
+            <!-- <div class="aui-news-list">
+                <a href="#" class="aui-flex b-line fix-header-style">
+                    <div class="topic-user-img">
+                        <img src="images/pd-001.png" alt>
+                    </div>
+                    <div class="topic-user-box">
+                        <h3>职业第三者</h3>
+                        <h4>
+                            <em>2021年2月3日 14:24:29</em>
+                            <em class="topic-h4-point">·</em>
+                            <em>发起话题</em>
+                        </h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="topic-aui-flex-box">
+                        <div class="topic-title">
+                            <p>成长到现在，在无数次的主动与被动的比较中,普通人要如何度过这一生？</p>
+                            <em class="focus">+关注</em>
+                            <div style="clear: both;"></div>
+                        </div>
+                        <h4>
+                            <em>956人关注</em>
+                            <em class="topic-h4-point">·</em>
+                            <em>243.9万次浏览</em>
+                        </h4>
+                        <p>成长到现在，在无数次的主动与被动的比较中，越来越认清了自己普普通通的事实，不是天才，生来并非富二代，大家想怎样度过自己短暂的一生呢？</p>
+                    </div>
+                </a>
+            </div> -->
+
+            <div class="divHeight b-line"></div>
+
+            <div>
+                <div class="cl-tabpage-cont__wrap">
+                    <div class="aui-news-list cl-tabpage-item active-content" style="display: none;">
+                        {{range $key ,$value := $.Data}}
+
+                            <a href="/bbs/detail/{{$value.Id}}.html">
+                                <div class="aui-flex fix-header-style">
+                                    <div class="topic-user-img">
+                                        <object>
+                                            <a href="/user/{{$value.Customer.Id}}">
+                                                <img src="{{$value.Customer.Image}}" alt>
+                                            </a>
+                                        </object>
+                                    </div>
+                                    <div class="topic-user-box">
+                                        <h3>
+                                            <object>
+                                                <a href="/user/{{$value.Customer.Id}}">{{$value.Customer.Username}}</a>
+                                            </object>
+                                        </h3>
+                                        <h4>
+                                            <em>{{TemlpateTime $value.Created}}</em>
+                                        </h4>
+                                    </div>
+                                    <div class="topic-user-box">
+                                        <em style="float: right;">
+                                            <i class="icon icon-sys">
+                                                <svg t="1620965733846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2990"></path><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2991"></path><path d="M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2992"></path></svg>
+                                            </i>
+                                        </em>
+                                    </div>
+                                </div>
+                                <div class="aui-flex topic-content">
+                                    {{if gt $value.TopicId 0}}
+                                    <em>
+                                        <object>
+                                            <a href="/topic/detail/{{$value.TopicId}}.html">{{$value.Topic.Content}}</a>
+                                        </object>       
+                                    </em>
+                                    {{end}}
+                                    <p>
+                                        {{str2html $value.Content}}
+                                    </p>
+                                    {{if gt ($value.Images|len) 0}}
+                                        <ul>
+                                            {{if gt ($value.Images|len) 1}}
+                                                {{range $k,$v := $value.Images}}
+                                                <li>
+                                                    <div>
+                                                        <img src="{{$v.Url}}"  data-index="{{$v.Id}}">
+                                                    </div>
+                                                </li>
+                                                {{end}}
+                                            {{else}}
+                                                {{range $k,$v := $value.Images}}
+                                                <li class="single">
+                                                    <div>
+                                                        <img src="{{$v.Url}}"  data-index="{{$v.Id}}">
+                                                    </div>
+                                                </li>
+                                                {{end}}
+                                            {{end}}
+                                        </ul>
+                                    {{end}}
+                                    
+                                    
+                                </div>
+                                <div class="b-line topic-bottom">
+                                    <ul>
+                                        <li>
+                                            <i class="topic-icon">
+                                                {{if eq $value.IsLike false}}
+                                                <img src="/static/app/images/like.png">
+                                                {{else}}
+                                                <img src="/static/app/images/liked.png">
+                                                {{end}}
+                                                <em>{{$value.Like}}</em>
+                                            </i>
+                                            
+                                        </li>
+                                        <li>
+                                            <i class="topic-icon">
+                                                <img src="/static/app/images/comment.png">
+                                                <em>{{$value.Review}}</em>
+                                            </i>
+                                        </li>
+                                        <li>
+                                            <i class="topic-icon">
+                                                <img src="/static/app/images/forward.png">
+                                                <em>230</em>
+                                            </i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </a>
+                        {{end}}
+                    </div>
+                    <div class="aui-news-list cl-tabpage-item" style="display: none;">
+                        
+                        <a href="detail.html">
+                            <div class="aui-flex fix-header-style">
+                                <div class="topic-user-img">
+                                    <object>
+                                        <a href="404.html">
+                                            <img src="/static/app/images/pd-001.png" alt>
+                                        </a>
+                                    </object>
+                                </div>
+                                <div class="topic-user-box">
+                                    <h3>
+                                        <object>
+                                            <a href="404.html">职业第三者</a>
+                                        </object>
+                                    </h3>
+                                    <h4>
+                                        <em>2021年2月3日 14:24:29</em>
+                                    </h4>
+                                </div>
+                                <div class="topic-user-box">
+                                    <em style="float: right;">
+                                        <i class="icon icon-sys">
+                                            <svg t="1620965733846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2990"></path><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2991"></path><path d="M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2992"></path></svg>
+                                        </i>
+                                    </em>
+                                </div>
+                            </div>
+                            <div class="aui-flex topic-content">
+                                <em>
+                                    <object>
+                                        <a href="topic.html">#这是个话题</a>
+                                    </object>
+                                </em>
+                                <p>
+                                    杨庄路是一条典型的通州街道，门脸窄小的SPA店、平价快餐店鳞次栉比，要不是拐角处新开了家“老年玩具店”，鲜有人会注意这里。
+
+3个月前，店主宋德龙租下杨庄路23号，挂起的招牌十分炸眼：“老有所玩老年玩具店”。我去的那天，“老有所玩”门前摆着一只“发泄拳击球”，透过玻璃窗望进去，几个穿黑色棉服的大爷围在一块，看宋德龙演示“音乐陀螺”的玩法。
+
+只见宋德龙将鞭子在在空中划出一道弧线，“啪”地一声脆响，精准抽落在陀螺边缘。闪着炫彩灯光的陀螺，旋即在铁盘里高速旋转起来。看了宋德龙演示，大爷们跃跃欲试，尤其是听到他说，“这个对缓解肩周炎有好处”。
+                                </p>
+                                <ul>
+                                    <li class="single">
+                                        <img src="/static/app/images/demo.jpg">
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                            <div class="b-line topic-bottom">
+                                <ul>
+                                    <li>
+                                        <i class="topic-icon">
+                                            <img src="/static/app/images/like.png">
+                                            <em>2340</em>
+                                        </i>
+                                        
+                                    </li>
+                                    <li>
+                                        <i class="topic-icon">
+                                            <img src="/static/app/images/comment.png">
+                                            <em>987</em>
+                                        </i>
+                                    </li>
+                                    <li>
+                                        <i class="topic-icon">
+                                            <img src="/static/app/images/forward.png">
+                                            <em>230</em>
+                                        </i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
+
+                        <a href="detail.html">
+                            <div class="aui-flex fix-header-style">
+                                <div class="topic-user-img">
+                                    <object>
+                                        <a href="404.html">
+                                            <img src="/static/app/images/pd-001.png" alt>
+                                        </a>
+                                    </object>
+                                </div>
+                                <div class="topic-user-box">
+                                    <h3>
+                                        <object>
+                                            <a href="404.html">职业第三者</a>
+                                        </object>
+                                    </h3>
+                                    <h4>
+                                        <em>2021年2月3日 14:24:29</em>
+                                    </h4>
+                                </div>
+                                <div class="topic-user-box">
+                                    <em style="float: right;">
+                                        <i class="icon icon-sys">
+                                            <svg t="1620965733846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2990"></path><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2991"></path><path d="M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2992"></path></svg>
+                                        </i>
+                                    </em>
+                                </div>
+                            </div>
+                            <div class="aui-flex topic-content">
+                                <em>
+                                    <object>
+                                        <a href="topic.html">#这是个话题</a>
+                                    </object>       
+                                </em>
+                                <p>
+                                    杨庄路是一条典型的通州街道，门脸窄小的SPA店、平价快餐店鳞次栉比，要不是拐角处新开了家“老年玩具店”，鲜有人会注意这里。
+
+3个月前，店主宋德龙租下杨庄路23号，挂起的招牌十分炸眼：“老有所玩老年玩具店”。我去的那天，“老有所玩”门前摆着一只“发泄拳击球”，透过玻璃窗望进去，几个穿黑色棉服的大爷围在一块，看宋德龙演示“音乐陀螺”的玩法。
+
+只见宋德龙将鞭子在在空中划出一道弧线，“啪”地一声脆响，精准抽落在陀螺边缘。闪着炫彩灯光的陀螺，旋即在铁盘里高速旋转起来。看了宋德龙演示，大爷们跃跃欲试，尤其是听到他说，“这个对缓解肩周炎有好处”。
+                                </p>
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <img src="/static/app/images/demo.jpg">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <img src="/static/app/images/demo.jpg">
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                            <div class="b-line topic-bottom">
+                                <ul>
+                                    <li>
+                                        <i class="topic-icon">
+                                            <img src="/static/app/images/like.png">
+                                            <em>2340</em>
+                                        </i>
+                                        
+                                    </li>
+                                    <li>
+                                        <i class="topic-icon">
+                                            <img src="/static/app/images/comment.png">
+                                            <em>987</em>
+                                        </i>
+                                    </li>
+                                    <li>
+                                        <i class="topic-icon">
+                                            <img src="/static/app/images/forward.png">
+                                            <em>230</em>
+                                        </i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+               
+            </div>
+        </section>
+
+        <footer class="aui-footer aui-footer-fixed">
+            <a href="/" class="aui-tabBar-item aui-tabBar-item-active">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-loan"></i>
+                </span>
+                <span class="aui-tabBar-item-text">首页</span>
+            </a>
+            
+            <a href="/articles.html" class="aui-tabBar-item ">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-credit"></i>
+                </span>
+                <span class="aui-tabBar-item-text">文章</span>
+            </a>
+            <a href="/bbs.html" class="aui-tabBar-item ">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-ions"></i>
+                </span>
+                <span class="aui-tabBar-item-text">社区</span>
+            </a>
+            <a href="/user/653" class="aui-tabBar-item ">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-car"></i>
+                </span>
+                <span class="aui-tabBar-item-text">我的</span>
+            </a>
+        </footer>
+    </section>
+</body>
+</html>
+<script type="text/javascript" src="/static/app/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/app/js/slider.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.cl-tabpage-title .cl-tabpage-item').click(function(){
+            indexC = $(this).index();
+            console.log(indexC)
+            $(this).addClass('active-title').siblings().removeClass('active-title');
+            $('.cl-tabpage-cont__wrap .cl-tabpage-item').eq(indexC).addClass('active-content').siblings().removeClass('active-content');
+        })
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        
+    })
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NGY93CNPH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NGY93CNPH2');
+</script>
+<!-- <script data-ad-client="ca-pub-1340648321287998" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+<script>
+    (function(){
+    var el = document.createElement("script");
+    el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?85dce07b9bb9fd6b134a8975fe39b9194bb1dccc9718f2198da85b7cc9df25a765e0a2ada1d5e86b11e7de7c1a83287d04743a02fd1ee8dd8558a8cad50e91cb354f8c6f3f78e5fd97613c481f678e6d";
+    el.id = "ttzz";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(el, s);
+    })(window)
+    </script>

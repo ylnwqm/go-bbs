@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{$.title}}</title>
+<meta name="keywords" content="{{$.keyword}}" />
+<meta name="description" content="{{$.description}}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/toutiao/css/base.css" rel="stylesheet">
+<link href="/static/toutiao/css/m.css" rel="stylesheet">
+<script src="/static/toutiao/js/jquery-1.8.3.min.js" ></script>
+<script src="/static/toutiao/js/comm.js"></script>
+<script src="/static/toutiao/js/hc-sticky.js"></script>
+<script src="/static/toutiao/js/aside-sticky.js"></script>
+{{template "home/toutiao/headerscript.html" .}}
+<!--[if lt IE 9]>
+<script src="static/js/modernizr.js"></script>
+<![endif]-->
+<!-- banner-->
+<link rel="stylesheet" href="/static/toutiao/css/swiper.min.css">
+<script src="/static/toutiao/js/swiper.min.js"></script>
+<script src="/static/toutiao/js/banner.js"></script>
+</head>
+<body>
+<!--top begin-->
+{{template "home/toutiao/top.html" .}}
+<article>
+  {{template "home/toutiao/header.html" .}}
+  <div class="box_l"> 
+    <!-- banner begin-->
+    <div class="banner">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {{range $key , $value := $.GID672748685312}}
+          <div class="swiper-slide"><a href="{{$value.Url}}" title="{{$value.Title}}" target="_blank"><img src="{{$value.Image}}" alt="{{$value.Title}}"><span>{{$value.Title}}</span></a></div>
+					{{end}}
+          
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+    <!-- banner end-->  
+    <ul class="news_list">
+
+
+      {{range $key ,$vlaue := $.Data}}
+      <li>
+        <a href="/detail/{{$vlaue.Id}}.html" title="{{$vlaue.Title}}" target="_blank">
+          {{if ne $vlaue.Cover ""}}
+            <i>
+            <img src="{{$vlaue.Cover}}" alt="{{$vlaue.Title}}">
+            </i>
+          {{end}}
+          
+          <h2>{{$vlaue.Title}}</h2>
+        </a>
+        <p class="news_list_info">{{$vlaue.Remark}}</p>
+        <p class="news_list_time"><span><a href="/article/category/{{$vlaue.Category.Id}}.html" target="_blank" title="{{$vlaue.Category.Name}}">{{$vlaue.Category.Name}}</a></span><span>时间：{{dateformat $vlaue.Created "2006-01-02"}} </span><span>点击：{{$vlaue.Pv}}</span></p>
+      </li>
+      {{end}}
+
+
+    </ul>
+  </div>
+  
+  {{template "home/toutiao/right.html" .}}
+
+</article>
+<a href="#" title="返回顶部" class="icon-top"></a>
+</body>
+</html>

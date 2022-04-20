@@ -1,0 +1,264 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{$.title}}</title>
+    <meta name="keywords" content="{{$.keyword}}" />
+    <meta name="description" content="{{$.description}}" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/static/app/css/style.css" rel="stylesheet" type="text/css">
+    <meta name="google-site-verification" content="4cUuOBEBsX2ewajR7B8mwodkdO-uvUfbrKZ15M96EIk" />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YbILrRYZIl1t07oBWTdspsTkGUFCVebFGrvfMxtkdU4',{api_host:'https://app.posthog.com'})
+</script>
+</head>
+<body>
+
+    <section class="aui-flexView">
+        <header class="aui-navBar aui-navBar-fixed">
+            <a href="javascript:;" class="aui-navBar-item">
+                <i class="icon "></i>
+            </a>
+            <div class="aui-center">
+                <span class="aui-center-title">首页</span>
+            </div>
+            <a href="javascript:;" class="aui-navBar-item">
+                <i class="icon icon-sys"></i>
+            </a>
+        </header>
+        <section class="aui-scrollView">
+            <div class="m-slider" data-ydui-slider>
+                <div class="slider-wrapper">
+                    {{range $key , $value := $.GID672748685312}}
+                    <div class="slider-item">
+                        <a href="{{$value.Url}}">
+                            <img src="{{$value.Image}}" title="{{$value.Title}}" alt="{{$value.Title}}">
+                        </a>
+                    </div>
+                    {{end}}
+                </div>
+                <div class="slider-pagination"></div>
+            </div>
+            <div class="divHeight b-line"></div>
+            <div class="aui-flex b-line" style="padding:0">
+                <div class="aui-flex-box">
+                    <img src="/static/app/images/ad-001.png" alt>
+                </div>
+                <div class="aui-flex-box">
+                    <img src="/static/app/images/ad-002.png" alt>
+                </div>
+            </div>
+            <div class="divHeight b-line"></div>
+            <div class="aui-flex b-line">
+                <div class="aui-flex-box">
+                    <h2>热门信息</h2>
+                </div>
+            </div>
+            <div class="aui-palace aui-palace-one b-line">
+                <a href="/bbs.html" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="/static/app/images/nav-001.png" alt>
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>社区</h2>
+                    </div>
+                </a>
+                <a href="#" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="/static/app/images/nav-003.png" alt>
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>树洞</h2>
+                    </div>
+                </a>
+                <a href="/article/category/13.html" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="/static/app/images/nav-004.png" alt>
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>每日读书</h2>
+                    </div>
+                </a>
+                <!--
+                <a href="#" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="/static/app/images/nav-004.png" alt>
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>商城</h2>
+                    </div>
+                </a>
+                -->
+            </div>
+            <div class="divHeight b-line"></div>
+            <div class="aui-news-list">
+                {{range $key ,$vlaue := $.Data}}
+                <a href="/detail/{{$vlaue.Id}}.html" title="{{$vlaue.Title}}" class="aui-flex b-line">
+                    {{if ne $vlaue.Cover ""}}
+                    <div class="aui-news-img">
+                        <span>{{$vlaue.Category.Name}}</span>
+                        <img src="{{$vlaue.Cover}}" style="width: 80px;height: 80px" alt="{{$vlaue.Title}}">
+                    </div>
+                    {{end}}
+                    <div class="aui-flex-box">
+                        <h3>{{$vlaue.Title}}</h3>
+                        <p>{{$vlaue.Remark}}</p>
+                        {{if eq $vlaue.Cover ""}}
+                            {{range $k ,$v := $vlaue.Images}}
+                                <div class="aui-news-img" style="float: left;width: 30%;">
+                                    <img src="{{$v}}" style="height: 80px" alt="{{$vlaue.Title}}">
+                                </div>
+                            {{end}}
+                        <div style="clear: both;padding-bottom: 5px"></div>
+                        {{end}}
+                        <h4><em>{{TemlpateTime $vlaue.Created}}</em> <em>{{$vlaue.Review}}次评论</em> <em>{{$vlaue.Pv}}次浏览</em></h4>
+                    </div>
+                </a>
+                {{end}}
+                <!-- <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-001.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>太和印象别墅小洋楼层好精装修家电齐全</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>50万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-002.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>京投发展公园悦府3居室-02卧京投发展公园悦府3居室-02卧</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>80万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-003.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>太和印象别墅小洋楼层好精装修家电齐全</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>50万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-004.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>京投发展公园悦府3居室-02卧京投发展公园悦府3居室-02卧</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>80万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-001.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>太和印象别墅小洋楼层好精装修家电齐全</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>50万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-002.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>京投发展公园悦府3居室-02卧京投发展公园悦府3居室-02卧</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>80万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-003.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>太和印象别墅小洋楼层好精装修家电齐全</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>50万</i></h4>
+                    </div>
+                </a>
+                <a href="#" class="aui-flex b-line">
+                    <div class="aui-news-img">
+                        <span>买房</span>
+                        <img src="images/pd-004.png" alt>
+                    </div>
+                    <div class="aui-flex-box">
+                        <h3>京投发展公园悦府3居室-02卧京投发展公园悦府3居室-02卧</h3>
+                        <p>天津市 南开区 <em>万达公馆</em></p>
+                        <h4><em>3室2厅2卫</em> <i>80万</i></h4>
+                    </div>
+                </a> -->
+            </div>
+        </section>
+        <footer class="aui-footer aui-footer-fixed">
+            <a href="/" class="aui-tabBar-item aui-tabBar-item-active">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-loan"></i>
+                </span>
+                <span class="aui-tabBar-item-text">首页</span>
+            </a>
+            
+            <a href="/articles.html" class="aui-tabBar-item ">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-credit"></i>
+                </span>
+                <span class="aui-tabBar-item-text">文章</span>
+            </a>
+            <a href="/bbs.html" class="aui-tabBar-item ">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-ions"></i>
+                </span>
+                <span class="aui-tabBar-item-text">社区</span>
+            </a>
+            <a href="/user/653" class="aui-tabBar-item ">
+                <span class="aui-tabBar-item-icon">
+                    <i class="icon icon-car"></i>
+                </span>
+                <span class="aui-tabBar-item-text">我的</span>
+            </a>
+        </footer>
+    </section>
+</body>
+
+<script type="text/javascript" src="/static/app/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/app/js/slider.js"></script>
+</html>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NGY93CNPH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NGY93CNPH2');
+</script>
+<!-- <script data-ad-client="ca-pub-1340648321287998" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+<script>
+    (function(){
+    var el = document.createElement("script");
+    el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?85dce07b9bb9fd6b134a8975fe39b9194bb1dccc9718f2198da85b7cc9df25a765e0a2ada1d5e86b11e7de7c1a83287d04743a02fd1ee8dd8558a8cad50e91cb354f8c6f3f78e5fd97613c481f678e6d";
+    el.id = "ttzz";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(el, s);
+    })(window)
+    </script>

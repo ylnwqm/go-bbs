@@ -1,0 +1,73 @@
+
+  <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+  <link rel="stylesheet" href="/static/baidu/dist/slider-x.css">
+  <style>
+    .my-slide {
+      height: 100px;
+    }
+    .my-slide span,.my-slide div{
+      font-size: 14px;
+      height: 30px;
+      line-height: 30px;
+    }
+    .pagination-style-3{
+      display: none !important;
+    }
+  </style>
+
+  <div class="my-slide" style="display: none;">
+    {{range $key ,$value := $.Match}}
+    <div style="border:1px solid #efefef;padding: 4px 10px;">
+      <div style="display: flex;justify-content: space-between;">
+        <span>{{$value.type}}</span>
+        <span>{{$value.status}}</span>
+      </div>
+      <div>
+        <div class="cardItemContent">
+          <div class="cardItemContentLine" style="display: flex;justify-content: space-between;">
+            <div class="cardImg">
+              <img src="{{$value.team1img}}" width="20" height="20">&nbsp;<!-- -->{{$value.team1name}}
+            </div>
+            <div>
+              <div style="" class="cardItemContentLine-count">
+                <div style="color: rgb(123, 126, 134);">{{$value.team1score}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="cardItemContentLine" style="display: flex;justify-content: space-between;">
+            <div class="cardImg"> 
+              <img src="{{$value.team2img}}" width="20" height="20">&nbsp;<!-- -->{{$value.team2name}}
+            </div>
+            <div class="cardItemContentLine-count">
+              <div style="" class="cardItemContentLine-count">
+                <div style="color: rgb(123, 126, 134);">{{$value.team2score}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{end}}
+  </div>
+
+  <script src="/static/baidu/dist/slider-x.js"></script>
+  <script>
+      $('.my-slide').pageflySlider({
+            slidesToShow: 6,
+            slidesToScroll: 6,
+            gutter: 1,
+            height:100,
+            autoPlay: false,
+            duration: '400',
+            autoPlayDelay: 2000,
+            loop: true,
+            navStyle: 'nav-style-111',
+            paginationStyle: 'pagination-style-3',
+          })
+
+  </script>
+  <script>
+    $(function(){
+      $('.my-slide').show()
+    })
+  </script>

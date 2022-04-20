@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>往期文章 - {{$.title}}</title>
+<meta name="keywords" content="{{$.keyword}}" />
+<meta name="description" content="{{$.description}}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/toutiao/css/base.css" rel="stylesheet">
+<link href="/static/toutiao/css/m.css" rel="stylesheet">
+<script src="/static/toutiao/js/jquery-1.8.3.min.js" ></script>
+<script src="/static/toutiao/js/comm.js"></script>
+<script src="/static/toutiao/js/hc-sticky.js"></script>
+{{template "home/toutiao/headerscript.html" .}}
+<!--[if lt IE 9]>
+<script src="static/js/modernizr.js"></script>
+<![endif]-->
+</head>
+<body>
+<!--top begin-->
+{{template "home/toutiao/top.html" .}}
+<article>
+
+  {{template "home/toutiao/header.html" .}}
+  <div class="box_l">
+    <div class="weizhi">您现在的位置是：<a href="/">首页</a>&nbsp;>&nbsp;往期文章</div>
+    <div class="timebox">
+      <ul>
+          {{range $k,$v := $.Data}}
+          <li><span>{{dateformat $v.Created "2006-01-02"}}</span><i><a href="/detail/{{$v.Id}}.html" title="{{$v.Title}}" target="_blank">{{$v.Title}}</a></i></li> 
+          {{end}}
+      </ul>
+    </div>
+    <div class="pagelist"></div>
+  </div>
+  {{template "home/toutiao/right.html" .}}
+</article>
+<a href="#" title="返回顶部" class="icon-top"></a>
+</body>
+</html>
+<script>
+    var Sticky = new hcSticky('aside', {
+      stickTo: 'article',
+      innerTop: 0,
+      followScroll: false,
+      queries: {
+        480: {
+          disable: true,
+          stickTo: 'body'
+        }
+      }
+    });
+</script>

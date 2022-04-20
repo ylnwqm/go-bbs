@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>留言 - {{$.title}}</title>
+<meta name="keywords" content="{{$.keyword}}" />
+<meta name="description" content="{{$.description}}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/toutiao/css/base.css" rel="stylesheet">
+<link href="/static/toutiao/css/m.css" rel="stylesheet">
+<script src="/static/toutiao/js/jquery-1.8.3.min.js" ></script>
+<script src="/static/toutiao/js/comm.js"></script>
+<script src="/static/toutiao/js/hc-sticky.js"></script>
+{{template "home/toutiao/headerscript.html" .}}
+<!--[if lt IE 9]>
+<script src="/static/toutiao/js/modernizr.js"></script>
+<![endif]-->
+</head>
+<body>
+<!--top begin-->
+{{template "home/toutiao/top.html" .}}
+<article>
+  {{template "home/toutiao/header.html" .}}
+  <div class="box_l">
+    <div class="weizhi">您现在的位置是：<a href="/">首页</a>&nbsp;>&nbsp;<a href="/message.html">留言</a></div>
+    <div class="container">
+      <h1>留言板</h1>
+      <div class="content" style="padding: 0 1.5rem;">
+          <div>
+              <form id="form">
+                <div>
+                    <textarea style="width: 100%;padding: 0.5rem;height: 5rem;" name="review" placeholder="留言内容..."></textarea>
+                </div>
+                <div>
+                    <div><input style="width: 100%;padding: 0.5rem;" type="text" name="name" placeholder="Name"></div>
+                    <div><input style="width: 100%;padding: 0.5rem;margin-top: 0.5rem;" type="text" name="site" placeholder="Site"></div>
+                </div>
+                <div>
+                    <input style="padding: 0.2rem 0.5rem;margin-top: 0.5rem;" type="button" value="提交" id="btnZzk">
+                </div>
+            </form>
+          </div>
+
+          <div style="margin-top: 2rem;">
+
+            
+            {{range $k,$v := $.Data}}
+            <div class="feedbackItem" style="padding: 0.5rem 0rem;border-bottom: 1px dashed;">
+                <div class="feedbackListSubtitle">
+                    <div class="feedbackManage">
+                        <span class="comment_actions">
+                            {{/*<a href="javascript:void(0);" onclick="return GetCommentBody(4334988)">
+                                修改
+                            </a>
+                            <a href="javascript:void(0);" onclick="return DelComment(4334988, this,'11370215')">
+                                删除
+                            </a>*/}}
+                        </span>
+                    </div>
+                    <a href="#{{IndexForOne $k $.Paginator.CurrentPage $.Paginator.PageSize}}" class="layer">#{{$v.Id}}楼</a>
+                    <a name="{{IndexForOne $k $.Paginator.CurrentPage $.Paginator.PageSize}}" id="comment_anchor_{{IndexForOne $k $.Paginator.CurrentPage $.Paginator.PageSize}}"></a>
+                    <span id="comment-maxId" style="display:none">{{IndexForOne $k $.Paginator.CurrentPage $.Paginator.PageSize}}</span>
+                    <span id="comment-maxDate" style="display:none">{{dateformat $v.Created "2006/01/02 下午3:00:04"}}</span>
+                    <span class="comment_date">{{dateformat $v.Created "2006-01-02 15:04"}}</span>
+                    <a id="a_comment_author_4334988" href="{{$v.Site}}" target="_blank">{{$v.Name}}</a>
+                </div>
+                <div class="feedbackCon">
+                    <div id="comment_body_4334988" class="blog_comment_body">
+                        {{$v.Review}}
+                        {{ if $v.Reply}}
+                        <div class="feedbackCon">{{$v.Reply}}
+                            <span class="comment_date" style="display: block;text-align: right">{{dateformat $v.Updated "2006-01-02 15:04"}}</span>
+                        </div>
+                        {{end}}
+                    </div>
+                    <div class="comment_vote">
+                        {{/*<a href="javascript:void(0);" class="comment_digg" onclick="return voteComment('4334988', 'Digg', this);">
+                            支持(0)
+                        </a>
+                        <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment('4334988', 'Bury', this);">
+                            反对(0)
+                        </a>*/}}
+                    </div>
+                    {{/*<span id="comment_4334988_avatar" style="display:none">
+                        https://pic.cnblogs.com/face/1154401/20170620111517.png
+                    </span>*/}}
+                </div>
+            </div>
+            {{end}}
+           
+            <div id="comment_pager_bottom" style="margin-top: 2rem;">
+                {{if gt .Paginator.CurrentPage 1}}
+                    <a class="prev" href="{{urlfor "home.MessageController.List"}}?page={{IndexDecrOne $.Paginator.CurrentPage}}">上一页</a>
+                {{end}}
+                {{if lt .Paginator.CurrentPage .Paginator.TotalPage}}
+                    <a class="next" href="{{urlfor "home.MessageController.List"}}?page={{IndexAddOne $.Paginator.CurrentPage}}">下一页</a>
+                {{end}}
+                <span class="current">第 {{.Paginator.CurrentPage}} 页 </span>
+                <span class="num">总 {{.Paginator.TotalPage}} 页</span>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {{template "home/toutiao/right.html" .}}
+</article>
+<a href="#" title="返回顶部" class="icon-top"></a>
+</body>
+</html>
+<script>
+    var Sticky = new hcSticky('aside', {
+      stickTo: 'article',
+      innerTop: 0,
+      followScroll: false,
+      queries: {
+        480: {
+          disable: true,
+          stickTo: 'body'
+        }
+      }
+    });
+</script>
+<script>
+    $(function () {
+        $("#btnZzk").click(function () {
+            $.ajax({
+                url:'/message/save',
+                type:'post',
+                data:$("#form").serialize(),
+                success:function (data) {
+                    if (data.code == 200) {
+                        window.location.reload()
+                    }
+                    console.log(data);
+                }
+            });
+        })
+    })
+</script>

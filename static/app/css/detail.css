@@ -1,0 +1,338 @@
+
+.active-title{
+    color: tomato;
+}
+
+.active-content{
+    display: block !important;
+}
+
+.cl-tabpage-title{
+    background: unset;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 0.8rem;
+}
+
+.search input{
+    border:1px;
+    border-radius:3px;
+    padding: 6px 20px;
+    background-color: #fff !important;
+    background: url("../images/search.png") no-repeat;;
+    background-position: 10px;
+}
+
+.search input::-webkit-input-placeholder {
+    font-size: 0.75rem;
+    padding-left: 10px;
+}
+
+.topic-icon{
+    margin:auto;
+}
+
+.topic-icon img{
+    display: inline-block;
+    vertical-align:text-bottom;
+    width:20px;
+    height:20px;
+}
+
+.topic-icon em{
+    color: #000;
+}
+
+
+
+.tab{
+    font-size: 0.8rem; 
+    margin-right:1rem;
+    font-style:normal;
+}
+
+.topic-user-img{
+    margin-right:0.5rem;
+    position:relative;
+}
+
+.topic-user-img img{
+    width:40px;
+    height:40px;
+    border-radius: 10%;
+}
+
+.fix-header-style{
+    padding-bottom: unset;
+}
+.fix-header-style:after{
+    border: unset !important;
+}
+
+.topic-user-box {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.topic-user-box h3{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 3; */
+    -webkit-box-orient: vertical;
+    /* word-wrap: normal;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    white-space: nowrap;
+    overflow: hidden; */
+    text-align: justify;
+    font-weight:bold;
+    font-size:0.8rem;
+}
+.topic-user-box h4{
+    color:#a4a4a4;
+    font-style:normal;
+    font-size:0.85rem;
+    font-weight:normal;
+}
+
+.topic-user-box h4 em{
+    font-style:normal;
+    font-size:0.6rem;
+}
+
+.topic-aui-flex-box {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.topic-aui-flex-box h3{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 3; */
+    -webkit-box-orient: vertical;
+    /* word-wrap: normal;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    white-space: nowrap;
+    overflow: hidden; */
+    text-align: justify;
+    font-weight:bold;
+    font-size:1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.topic-title p{
+    overflow : hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-align: justify !important;
+    font-weight:bold !important;
+    font-size:1.2rem !important;
+    margin-bottom: 0.5rem !important;
+    float: left !important;
+    width: 80% !important;
+    color: #333 !important;
+}
+.topic-title em{
+    font-style:normal !important;
+    float:right !important;
+    margin-top: 5px;
+    padding: 3px 5px;
+    background-color: #31cb4a;
+    color: white;
+    border-radius: 5px;
+}
+
+.topic-aui-flex-box p{
+    font-weight:normal;
+    color:#8c8787ab;
+    font-style:normal;
+    font-size:0.75rem;
+    margin-bottom:0.5rem;
+}
+
+.topic-aui-flex-box h4{
+    color:#a4a4a4;
+    font-style:normal;
+    font-size:0.85rem;
+    margin-bottom:0.5rem;
+    font-weight:normal;
+}
+
+.topic-aui-flex-box h4 em{
+    font-style:normal;
+    font-size:0.6rem;
+}
+
+.topic-h4-point {
+    font-style:normal;
+    font-size:0.6rem;
+    padding-left: 0.3rem;
+}
+
+
+
+/* ******************************************** */
+
+
+
+.topic-content{
+    display:block;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.topic-content em{
+    font-style:normal;
+    font-size:0.8rem;
+}
+.topic-content em a{
+    color:#28a63d;
+    padding:2px 10px;
+    background-color: #e9f9ec;
+    border-radius: 10px;
+    margin-bottom: 0.2rem;
+    display: inline-block;
+}
+
+.single{
+    width: 60% !important;
+}
+
+.single:before{
+    content: "";
+    display: block;
+}
+
+.topic-content li{
+    margin-top: 10px;
+    max-width: 60%;
+    width: 32%;
+    display: inline-flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+ }
+
+ .topic-content li div{
+    width: 100%;
+    position: relative;
+    height: 0;
+    padding-top: 100%;
+ }
+
+ .topic-content li div img{
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+ }
+
+.topic-content p {
+    font-style:normal;
+    font-size:0.8rem;
+}
+
+.topic-bottom{
+    border-bottom: 1px solid #e2e2e2;
+    border-top: 1px solid #e2e2e2;
+}
+.topic-bottom ul li{
+    display: inline-flex;
+    flex-direction:column;
+    width: 32%;
+    text-align: center;
+    margin:0.5rem 0rem;
+}
+
+.aui-footer{
+    box-shadow: unset;
+}
+
+.detail-bottom{
+    width: 100%;
+    padding:0.2rem 1rem;
+}
+
+.detail-bottom ul li{
+    display: inline-flex;
+    flex-direction:column;
+    text-align: right;
+    width:15%;
+}
+
+.detail-bottom ul li:first-child{
+    width:50%;
+    text-align:center;
+}
+
+.detail-bottom ul li:first-child input{
+    
+    border-radius:15px;
+    padding: 3px 10px;
+    border: 1px solid #f5f5f5;
+    background-color: #f5f5f5 !important;
+}
+
+.detail-bottom ul li:first-child input::-webkit-input-placeholder {
+    font-size: 0.75rem;
+}
+
+.detail-bottom ul li i{
+    margin: unset;
+}
+
+.null-comtent{
+    font-weight:normal;
+    color:#8c8787ab;
+    font-style:normal;
+    font-size:0.75rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.detail-comment-content{
+    padding-bottom: 0.5rem;
+    margin-left: 63px;
+}
+.detail-comment div p{
+    /* background-color: #f5f5f5; */
+    font-weight:normal;
+    color:#8c8787ab;
+    font-style:normal;
+    font-size:0.75rem;
+    padding-bottom: 0.5rem;
+}
+.detail-comment div p:after{
+    left: 0px !important;
+}
+
+.detail-tab-comtent-item{
+    display: none;
+}
+
+.detail-sub-comtent{
+    margin-top: 0.5rem;
+    padding: unset !important;
+}
+
+.detail-sub-comment-content{
+    padding-bottom: 0.5rem;
+    margin-left: 48px;
+}
+
+.reply-user a{
+    color:#28a63d;
+}

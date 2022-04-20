@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{$.Data.Title}}</title>
+    <meta name="keywords" content="{{$.keyword}}，{{$.Data.Title}}" />
+    <meta name="description" content="{{$.description}}" />
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/static/app/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/app/css/detail.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/md/css/editormd.preview.css" />
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YbILrRYZIl1t07oBWTdspsTkGUFCVebFGrvfMxtkdU4',{api_host:'https://app.posthog.com'})
+</script>
+<style>
+.wbp {
+    margin-top: 50px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    border-top: 1px solid var(--baseBgColor,#ebebeb);
+    text-align: center;
+}
+.editormd-html-preview{
+	padding: unset !important;
+}
+.markdown-body ol{
+	padding-left: 2em !important;
+}
+.entry ol{
+	padding-left: unset !important;
+}
+#article-markdown-view li{
+	list-style: unset !important;
+}
+.entry table {
+	border: 0px solid #ddd ;
+}
+</style>
+</head>
+<body>
+    
+    <section class="aui-flexView">
+        <header class="aui-navBar aui-navBar-fixed">
+            <a href="javascript:history.go(-1);" class="aui-navBar-item">
+                <i class="icon ">
+                    <svg t="1620971982591" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="2990" fill="#ffffff"></path></svg>
+                </i>
+            </a>
+            <div class="aui-center">
+                <span class="aui-center-title">{{$.Data.Title}}</span>
+            </div>
+            <a href="javascript:;" class="aui-navBar-item">
+                <i class="icon icon-sys"><svg t="1620965733846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="48" height="48"><path d="M192 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2990" fill="#ffffff"></path><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2991" fill="#ffffff"></path><path d="M832 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="2992" fill="#ffffff"></path></svg></i>
+            </a>
+        </header>
+        <section class="aui-scrollView">
+
+            <div>
+                <div class="cl-tabpage-cont__wrap">
+                    <div class="aui-news-list cl-tabpage-item">
+                        <a href="javascript:;">
+                            <div class="aui-flex fix-header-style">
+                                <div class="topic-user-img">
+                                    <object>
+                                        <a href="/user/{{$.Data.Customer.Id}}" title="{{$.Data.Customer.Username}}">
+                                            <img src="/static/app/images/pd-001.png" alt="{{$.Data.Customer.Username}}">
+                                        </a>
+                                    </object>
+                                </div>
+                                <div class="topic-user-box">
+                                    <h3>
+                                        <object>
+                                            <a href="/user/{{$.Data.Customer.Id}}" title="{{$.Data.Customer.Username}}">{{$.Data.Customer.Username}}</a>
+                                        </object>
+                                    </h3>
+                                    <h4>
+                                        <em>{{dateformat $.Data.Created "2006-01-02 15:04:05"}}</em>
+                                    </h4>
+                                </div>
+                               
+                            </div>
+                            <div class="aui-flex topic-content">
+                                <em style="border-bottom: 1px #e9e9e2 solid;display: block;padding-bottom: 10px;">
+                                    <object>
+                                        <a href="javascript:;">{{$.Data.Tag}}</a>
+                                    </object>
+                                </em>
+
+                                <div class="entry clearfix" id="article-markdown-view" style="overflow:hidden;">
+                                    <textarea style="display:none;">{{$.Data.Desc}}</textarea> 
+                                </div>
+                                   
+                                
+                                <!-- 图片注释
+                                <ul>
+                                    <li class="single">
+                                        <img src="/static/app/images/demo.jpg">
+                                    </li>
+                                </ul>
+                                -->
+                                
+                            </div>
+                            <div class="divHeight"></div>
+                            <div class="topic-bottom">
+                                <ul class="detail-tab">
+                                    <li class="active-title">
+                                        <i class="topic-icon">
+                                            回复
+                                            <em>{{$.Data.Review}}</em>
+                                        </i>
+                                    </li>
+                                    <li>
+                                        <i class="topic-icon">
+                                            点赞
+                                            <em>{{$.Data.Like}}</em>
+                                        </i>
+                                    </li>
+                                    <li>
+                                        <i class="topic-icon">
+                                            浏览
+                                            <em>{{$.Data.Pv}}</em>
+                                        </i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="detail-comment detail-tab-comtent">
+                                <div class="detail-tab-comtent-item active-content">
+                                    <!-- <p class="null-comtent">暂无回复,<em>发回复</em></p> -->
+                                    <!-- <object>
+                                        <a href="javascript:;">
+                                            <div class="aui-flex fix-header-style">
+                                                <div class="topic-user-img">
+                                                    <object>
+                                                        <a href="404.html">
+                                                            <img src="/static/app/images/pd-001.png" alt>
+                                                        </a>
+                                                    </object>
+                                                </div>
+                                                <div class="topic-user-box">
+                                                    <h3>
+                                                        <object>
+                                                            <a href="404.html">职业第三者</a>
+                                                        </object>
+                                                    </h3>
+                                                    <h4>
+                                                        <em>2021年2月3日 14:24:29</em>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="detail-comment-content">
+                                                <p class="b-line">杨庄路是一条典型的通州街道，门脸窄小的SPA店.</p>
+                                                <object>
+                                                    <a href="javascript:;">
+                                                        <div class="aui-flex fix-header-style detail-sub-comtent">
+                                                            <div class="topic-user-img">
+                                                                <object>
+                                                                    <a href="404.html">
+                                                                        <img src="/static/app/images/pd-001.png" alt>
+                                                                    </a>
+                                                                </object>
+                                                            </div>
+                                                            <div class="topic-user-box">
+                                                                <h3>
+                                                                    <object>
+                                                                        <a href="404.html">职业第三者</a>
+                                                                    </object>
+                                                                </h3>
+                                                                <h4>
+                                                                    <em>2021年2月3日 14:24:29</em>
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="detail-sub-comment-content">
+                                                            <p class="b-line">杨庄路是一条典型的通州街道，门脸窄小的SPA店.</p>
+                                                        </div>
+                                                    </a>
+                                                </object>
+                                                <object>
+                                                    <a href="javascript:;">
+                                                        <div class="aui-flex fix-header-style detail-sub-comtent">
+                                                            <div class="topic-user-img">
+                                                                <object>
+                                                                    <a href="404.html">
+                                                                        <img src="/static/app/images/pd-001.png" alt>
+                                                                    </a>
+                                                                </object>
+                                                            </div>
+                                                            <div class="topic-user-box">
+                                                                <h3>
+                                                                    <object>
+                                                                        <a href="404.html">职业第三者</a>
+                                                                    </object>
+                                                                </h3>
+                                                                <h4>
+                                                                    <em>2021年2月3日 14:24:29</em>
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="detail-sub-comment-content">
+                                                            <p class="b-line"><span>回复@</span><object class="reply-user"><a href="404.html">烟雨</a></object><span>：</span>杨庄路是一条典型的通州街道，门脸窄小的SPA店.</p>
+                                                        </div>
+                                                    </a>
+                                                </object>
+                                            </div>
+                                        </a>
+                                    </object>
+                                    <object>
+                                        <a href="javascript:;">
+                                            <div class="aui-flex fix-header-style">
+                                                <div class="topic-user-img">
+                                                    <object>
+                                                        <a href="404.html">
+                                                            <img src="images/pd-001.png" alt>
+                                                        </a>
+                                                    </object>
+                                                </div>
+                                                <div class="topic-user-box">
+                                                    <h3>
+                                                        <object>
+                                                            <a href="404.html">职业第三者</a>
+                                                        </object>
+                                                    </h3>
+                                                    <h4>
+                                                        <em>2021年2月3日 14:24:29</em>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="detail-comment-content">
+                                                <p class="b-line">杨庄路是一条典型的通州街道，门脸窄小的SPA店.</p>
+                                            </div>
+                                        </a>
+                                    </object>
+                                    <object>
+                                        <a href="javascript:;">
+                                            <div class="aui-flex fix-header-style">
+                                                <div class="topic-user-img">
+                                                    <object>
+                                                        <a href="404.html">
+                                                            <img src="/static/app/images/pd-001.png" alt>
+                                                        </a>
+                                                    </object>
+                                                </div>
+                                                <div class="topic-user-box">
+                                                    <h3>
+                                                        <object>
+                                                            <a href="404.html">职业第三者</a>
+                                                        </object>
+                                                    </h3>
+                                                    <h4>
+                                                        <em>2021年2月3日 14:24:29</em>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="detail-comment-content">
+                                                <p class="b-line">杨庄路是一条典型的通州街道，门脸窄小的SPA店.</p>
+                                            </div>
+                                        </a>
+                                    </object> -->
+                                </div>
+                                <div class="detail-tab-comtent-item">
+                                    <p class="null-comtent">暂无点赞</p>
+                                </div>
+                                <div class="detail-tab-comtent-item">
+                                    <p class="null-comtent">暂无收藏</p>
+                                </div>
+                            </div>
+                        </a>     
+                    </div>
+                    
+                </div>
+               
+            </div>
+        
+        </section>
+
+        <footer class="aui-footer aui-footer-fixed">
+            <div class="detail-bottom">
+                <ul>
+                    <li>
+                        <input type="text" placeholder="写回复">
+                        
+                    </li>
+                    <li>
+                        <i class="topic-icon">
+                            <img src="/static/app/images/like.png">
+                        </i>
+                    </li>
+                    <li>
+                        <i class="topic-icon">
+                            <img src="/static/app/images/forward.png">
+                        </i>
+                    </li>
+                    <li>
+                        <i class="topic-icon">
+                            <img src="/static/app/images/collect.png">
+                        </i>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </section>
+</body>
+
+<script type="text/javascript" src="/static/app/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/app/js/slider.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $('.detail-tab li').click(function(){
+             indexC = $(this).index();
+             console.log(indexC)
+			$(this).addClass('active-title').siblings().removeClass('active-title');
+			$('.detail-tab-comtent .detail-tab-comtent-item').eq(indexC).addClass('active-content').siblings().removeClass('active-content');
+		})
+
+            $.ajax({
+                url:'/pv/{{$.Data.Id}}.html',
+                type:'get',
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+    });
+    </script>
+</html>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NGY93CNPH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NGY93CNPH2');
+</script>
+<!-- <script data-ad-client="ca-pub-1340648321287998" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+<script>
+    (function(){
+    var el = document.createElement("script");
+    el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?85dce07b9bb9fd6b134a8975fe39b9194bb1dccc9718f2198da85b7cc9df25a765e0a2ada1d5e86b11e7de7c1a83287d04743a02fd1ee8dd8558a8cad50e91cb354f8c6f3f78e5fd97613c481f678e6d";
+    el.id = "ttzz";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(el, s);
+    })(window)
+    </script>
+    <script src="/static/md/editormd.min.js"></script>
+<script src="/static/md/lib/marked.min.js"></script>
+<script src="/static/md/lib/prettify.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+	    var testView = editormd.markdownToHTML("article-markdown-view", {
+			//path : '../lib/',
+            // markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+            htmlDecode : true,  // Enable / disable HTML tag encode.
+            // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+		});
+    });
+</script> 

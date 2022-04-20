@@ -1,0 +1,21 @@
+runmode = prod
+sessionon = true
+url = https://nihongdengxia.com
+view = nihongdengxia
+httpport = 9090
+
+EnableAdmin = false
+AdminAddr = "localhost"
+AdminPort = 8888
+
+[db]
+dbType = mysql
+dbUser = root
+dbPass = 123456
+dbHost = 192.168.31.146
+dbPort = 3306
+dbName = blogtesta
+
+[email]
+Name = 霓虹灯下社区
+AuthorizationCode = nczgusodacbiusshk

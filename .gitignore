@@ -1,0 +1,10 @@
+.idea/*
+installed
+conf/app.conf
+vendor/
+go-blog
+static/uploads/bbsfile/20210706/364068224-1-208.mp4
+lastupdate.tmp
+nohup.out
+user.ini
+well-known

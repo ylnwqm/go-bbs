@@ -1,0 +1,106 @@
+<link rel="stylesheet" type="text/css" href="/static/danmu/dist/css/barrager.css">
+
+
+<script type="text/javascript" src="/static/danmu/static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/danmu/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/danmu/static/js/tinycolor-0.9.15.min.js"></script>  
+<script type="text/javascript" src="/static/danmu/dist/js/jquery.barrager.min.js"></script>
+<script type="text/javascript" src="/static/danmu/static/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/static/danmu/static/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/static/danmu/static/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+
+<script type="text/javascript">
+      String.prototype.format = function(args) {
+        var result = this;
+        if (arguments.length < 1) {
+            return result;
+        }
+        var data = arguments;        
+        if (arguments.length == 1 && typeof (args) == "object") {
+            data = args;
+        }
+        for (var key in data) {
+            var value = data[key];
+            if (undefined != value) {
+                result = result.replace("{" + key + "}", value);
+            }
+        }
+        return result;
+    }
+
+    var  barrager_code=
+        'var item={\n'+
+        "   img:'{img}', //图片 \n"+
+        "   info:'{info}', //文字 \n"+
+        "   href:'{href}', //链接 \n"+
+        "   close:{close}, //显示关闭按钮 \n"+
+        "   speed:{speed}, //延迟,单位秒,默认6 \n"+
+        "   bottom:{bottom}, //距离底部高度,单位px,默认随机 \n"+
+        "   color:'{color}', //颜色,默认白色 \n"+
+        "   old_ie_color:'{old_ie_color}', //ie低版兼容色,不能与网页背景相同,默认黑色 \n"+
+        " }\n"+
+        "$('body').barrager(item);"
+        ;
+
+    $(function() {
+
+        SyntaxHighlighter.all();
+        var item={'img':'/static/baidu/img/gooooooooogle_460x71.png','href':'http://goooooooogle.cn','info':'欢迎来到 Gooooooooogle 摸鱼社区'};
+
+        $('body').barrager(item);
+        //每条弹幕发送间隔
+        var looper_time=15*60*1000;
+        //是否首次执行
+        var run_once=true;
+        do_barrager();
+        
+        function do_barrager(){
+        if(run_once){
+            //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+            looper = setInterval(do_barrager,looper_time);                
+            run_once=false;
+        }
+        //获取
+        $.getJSON('/get/danmu',function(data){
+            //是否有数据
+            var items=data.Data;
+            var total = data.Data.length;
+            if(total > 0){
+                var looper_time_2 = 15*1000;
+                
+                //是否首次执行
+                var run_once_2 = true;
+                //弹幕索引
+                var index=0;
+                //先执行一次
+                barrager();
+                function  barrager(){
+                
+                
+                    if(run_once_2){
+                        //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+                        looper_2 = setInterval(barrager,looper_time_2);                
+                        run_once_2=false;
+                    }
+                    //发布一个弹幕
+                    // console.log(items[index])
+                    $('body').barrager(items[index]);
+                    //索引自增
+                    index++;
+                    //所有弹幕发布完毕，清除计时器。
+                    if(index == total){
+                        clearInterval(looper_2);
+                        return false;
+                    }
+                
+                }
+
+                // $('body').barrager(data);
+            }
+        
+        });
+        }
+
+        
+    })
+</script>

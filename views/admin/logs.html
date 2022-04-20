@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="/static/css/font.css">
+        <link rel="stylesheet" href="/static/css/xadmin.css">
+        <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    </head>
+    
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb">
+                <a href="">首页</a>
+                <a href="">演示</a>
+                <a>
+                    <cite>导航元素</cite></a>
+            </span>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+            </a>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <form class="layui-form layui-col-space5" id="form" action="{{urlfor "admin.LogController.GetAll"}}" method="get">
+                                <div class="layui-input-inline layui-show-xs-block">
+                                    <input class="layui-input" placeholder="开始日" value="{{if .Start}}{{.Start}}{{end}}" name="start" id="start"></div>
+                                <div class="layui-input-inline layui-show-xs-block">
+                                    <input class="layui-input" placeholder="截止日" value="{{if .End}}{{.End}}{{end}}"  name="end" id="end"></div>
+                                <div class="layui-input-inline layui-show-xs-block">
+                                    <input value="{{if .Referer}}{{.Referer}}{{end}}" type="text" name="referer" placeholder="来源" autocomplete="off" class="layui-input"></div>
+                                <div class="layui-input-inline layui-show-xs-block">
+                                    <button type="reset" class="layui-btn" onclick="reset_form()"><i class="layui-icon layui-icon-refresh"></i></button>
+                                    <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                                        <i class="layui-icon">&#xe615;</i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table layui-form">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>时间</th>
+                                        <th>IP</th>
+                                        <th>类型</th>
+                                        <th>城市</th>
+                                        <th>来源</th>
+                                        <th>访问页面</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {{range $key, $value := $.Data}}
+                                    <tr>
+                                        <td>{{IndexForOne $key $.Paginator.CurrentPage $.Paginator.PageSize}}</td>
+                                        <td>{{$value.Create}}</a></td>
+                                        <td>{{$value.Ip}}</td>
+                                        <td>{{$value.UserAgent}}</td>
+                                        <td>{{$value.City}}</td>
+                                        <th>{{$value.Referer}}</th>
+                                        <td>{{$value.Page}}</td>
+                                    </tr>
+                                {{end}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="layui-card-body ">
+                            <div class="page" id="page">
+                                <div>
+                                    <span class="current">{{.Paginator.CurrentPage}}</span>
+                                    {{if gt .Paginator.CurrentPage 1}}
+                                        <a class="prev" href="{{urlfor "admin.LogController.GetAll"}}?page={{IndexDecrOne $.Paginator.CurrentPage}}&start={{if .Start}}{{.Start}}{{end}}&end={{if .End}}{{.End}}{{end}}&referer={{if .Referer}}{{.Referer}}{{end}}">上一页</a>
+                                    {{end}}
+                                    {{if lt .Paginator.CurrentPage .Paginator.TotalPage}}
+                                        <a class="next" href="{{urlfor "admin.LogController.GetAll"}}?page={{IndexAddOne $.Paginator.CurrentPage}}&start={{if .Start}}{{.Start}}{{end}}&end={{if .End}}{{.End}}{{end}}&referer={{if .Referer}}{{.Referer}}{{end}}">下一页</a>
+                                    {{end}}
+                                    <span class="num">总 {{.Paginator.TotalPage}} 页</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        layui.use(['laydate', 'form','laypage'],
+            function() {
+                var laydate = layui.laydate;
+                var form = layui.form;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#start' //指定元素
+                    ,format:'yyyy-MM-dd HH:mm:ss'
+                });
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#end' //指定元素
+                    ,format:'yyyy-MM-dd HH:mm:ss'
+                });
+            }
+        );
+    </script>
+
+</html>

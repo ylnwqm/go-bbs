@@ -1,0 +1,14 @@
+<nav>
+    <div class="topnav"> <a href="/" class="logo"><img style="height: auto;width: 100%;" src="{{$.image}}"></a>
+        <ul id="starlist">
+        {{range $k ,$v := $.Menu}}
+                <li>
+					<a title="{{$v.Title}}" target="{{$v.Target}}" href="{{$v.Url}}">
+						{{$v.Title}}
+					</a>
+                </li>
+        {{end}}
+        </ul>
+    </div>
+    <span></span>
+</nav>

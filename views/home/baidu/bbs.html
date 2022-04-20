@@ -1,0 +1,665 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="referrer" content="unsafe-url">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/baidu/img/icon_144-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/baidu/img/icon_120-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/baidu/img/icon_72-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/static/baidu/img/icon_52-52.png">
+
+    <script type="text/javascript" src="/static/baidu/js/jquery-1.8.3.min.js"></script>
+    <meta name="keywords" content="Gooooooooogle、搜索、Google搜索、Gooooooooogle热榜、热榜、每日简报、上班摸鱼、当日热门、聚合资讯、历史上的今天">
+    <meta name="description" content="Gooooooooogle搜索提供了国内百度国外Google搜索,在搜索过程中也能看到历史上的今天发生的各种事情。并且集成了各大热门网站的聚合信息、榜单,包括了知乎、微博、虎扑、V2EX、贴吧、Github、抖音、今日头条等等,在这里你能够轻松了解全网最新资讯">
+    <title>Gooooooooogle 搜索社区 | Gooooooooogle热榜-聚合每日热门、有趣资讯、历史上的今天</title>
+    <link rel="shortcut icon" href="/static/baidu/img/gooooooooogle.png" type="image/x-icon">
+    <link rel="icon" sizes="any" mask="" href="/static/baidu/img/gooooooooogle.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <script src="/static/baidu/js/vue-2.5.17.js"></script>
+    <link rel="stylesheet" href="/static/baidu/css/bbs.css">
+    <script>
+        function getCookie(cookieName) {
+            var strCookie = document.cookie;
+            var arrCookie = strCookie.split("; ");
+            for (var i = 0; i < arrCookie.length; i++) {
+                var arr = arrCookie[i].split("=");
+                if (cookieName == arr[0]) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+
+        //var abc = getCookie('_CS_USER_TAGS');
+        //console.log(abc);
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+
+        var browser = {
+            versions: function() {
+                var u = navigator.userAgent,
+                    app = navigator.appVersion;
+                return { //移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+
+        //alert(browser.versions.mobile);
+        if (browser.versions.mobile) { //判断是否是移动设备打开。browser代码在下面
+            var ua = navigator.userAgent.toLowerCase(); //获取判断用的对象
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                //在微信中打开
+                getWXShareConfig();
+
+                $.ajax({ //获取用户收藏列表
+                    type: 'POST',
+                    url: API_BASE_URL + '/sv1/guider/list',
+                    data: {
+                        uLabel: 1,
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.withCredentials = true
+                    },
+                    dataType: 'JSON',
+                    success: function(data) {
+                        //console.log(data);
+                        if (data.status != 0) {
+                            // var appId = "wx38eb2f1d8a56fcf4";//暂时用 公众号的测试appId
+                            var appId = "wx8c288d191e46cb46"; //线上用
+                            var scope = "snsapi_userinfo";
+                            var state = "asd";
+                            var err_code = ''; //SUCCESS  error
+
+                            var urlParameter = window.location.href.split('?')[1]; // url的拼接参数
+                            if (urlParameter && urlParameter.length) {
+                                var params = urlParameter.split("&");
+                                urlParameter = "";
+                                if (params && params.length) {
+                                    params.forEach(function(p, index) {
+                                        if (p && p.length && !p.includes("code=")) {
+                                            if (urlParameter && urlParameter.length) {
+                                                urlParameter = urlParameter + "&" + p;
+                                            } else {
+                                                urlParameter = urlParameter + p;
+                                            }
+                                        }
+                                    })
+                                }
+                                if (urlParameter && urlParameter) urlParameter = "&" + urlParameter;
+                            } else {
+                                urlParameter = "";
+                            }
+
+                            var redirectUrl = encodeURIComponent(window.location.protocol + "//www.addog.vip/sv1/guider/wxIndex?type=1" + urlParameter);
+                            // var redirectUrl = encodeURIComponent("http://zouzou123.ngrok2.xiaomiqiu.cn/sv1/guider/wxIndex?type=1" + urlParameter);
+                            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                                "appid=" + appId + "&redirect_uri=" + redirectUrl +
+                                "&response_type=code&scope=" + scope + "&state=" + state + "#wechat_redirect";
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+
+<body class="body-home body-website">
+
+
+
+    <div class="mobHead flexEle">
+
+        <div class="mobLogoBox" id="mobLogoBox">
+            <img onerror="this.style.opacity=0" src="/static/baidu/img/gooooooooogle_460x71.png" alt="">
+        </div>
+
+        <p style="margin-left: -130px;"><a href="#toMobHotList" id="realTimeHot">实时热点</a></p>
+
+
+        <div class="mobHeadImgBox">
+            <img onerror="this.style.opacity=0" src="" id="mobHotHead">
+        </div>
+
+    </div>
+
+    <div class="head">
+        <div class="container">
+            <div class="head_left">
+                <a href="javascript:void(0);" onclick="SetHome(this,window.location.href.split('#')[0])">设为首页</a>
+                <span></span>
+                <a href="javascript:void(0);" onclick="AddFavorite(window.location.href.split('#')[0],'加入收藏');">收藏一下</a>
+                <span></span>
+                <a href="/">回到首页</a>
+            </div>
+            <div class="head_right">
+                <!-- <img src="" id="userHeadImg" alt="">
+                <p id="login">登录</p>
+                <span id="outLogin">退出登录</span> -->
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container" id="searchCon">
+            <div class="marginRight" style="margin-left: unset;">
+                <!-- <h1 class="logo">
+                    <strong>
+                        <a href="/"> <img onerror="this.style.opacity=0" src="/static/baidu/img/img_addog_logo.png" alt="广告创意/市场营销/公关策划工具大全"> </a> </strong>
+                </h1> -->
+                <div class="primary-menus" style="margin-left: unset;">
+                    <ul class="selects">
+                        <li class="current" data-target="adguider-search" style="background-color: rgb(23 44 82);" ><span><img style="width: 148px;height: auto;vertical-align: middle;" src="http://gooooooooogle.cn/static/baidu/img/gooooooooogle_460x71.png"></span>
+                            <div>NEW</div>
+                        </li>
+                        <!-- <li data-target="baidu-search"><span>百度</span></li> -->
+                        <!-- <li data-target="google-search"><span>Google</span></li>
+                        <li data-target="bing-search"><span>Bing</span></li>
+                        <li data-target="sogou-search"><span>微信搜狗</span></li> -->
+                    </ul>
+                    <div class="cont">
+                        <div class="left-cont">
+                            <form class="search" id="adguider-search" action="https://www.baidu.com/s" method="get" target="_blank">
+                                <input type="text" name="wd" class="s inputPlaceholer" id="adguiderInput" autocomplete="off" placeholder="请输入你要搜索的内容">
+                                <button type="submit" class="btn" id="adguiter">搜索</button>
+                            </form>
+                            <!-- <form class="search hidden" id="baidu-search" action="https://www.baidu.com/baidu" method="get" target="_blank">
+                                <input type="text" name="wd" class="s" id="baiduInput" autocomplete="off">
+                                <button type="submit" class="btn" id="baidu">百度一下</button>
+
+                            </form>
+                            <form class="search hidden" id="google-search" action="https://www.google.com/search" method="get" target="_blank">
+                                <input type="text" name="q" class="s" id="googleInput" autocomplete="off">
+                                <button type="submit" class="btn" id="google">Google</button>
+                            </form>
+                            <form class="search hidden" id="bing-search" action="https://cn.bing.com/search" method="get" target="_blank">
+                                <input type="text" name="q" class="s" id="bing" autocomplete="off">
+                                <button type="submit" class="btn" id="bingInput">Bing</button>
+                            </form>
+                            <form class="search hidden" id="sogou-search" action="https://weixin.sogou.com/weixin" method="get" target="_blank">
+
+                                <input type="text" name="query" class="s" id="sogouInput" autocomplete="off">
+                                <button type="submit" class="btn" id="sogou">搜文章</button>
+                            </form> -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="hotSearchWordList" style="margin-left: 10px;">
+                    <ul>
+                        推荐组合词：
+                        <li>
+                            <a href="https://www.baidu.com/s?wd=历史上的今天" target="_blank">历史上的今天</a>
+                        </li>
+                        <li>
+                            <a href="https://www.baidu.com/s?wd=热门资讯" target="_blank">热门 资讯</a>
+                        </li>
+                        <li>
+                            <a href="https://www.baidu.com/s?wd=摸鱼网站" target="_blank">摸鱼网站</a>
+                        </li>
+                        <li>
+                            <a href="https://www.baidu.com/s?wd=Gooooooooogle搜索" target="_blank">Gooooooooogle 搜索</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="addogCalendar flexEle" id="addogCalendar">
+                <div class="weekCalendar" v-for="(item,index) in listA" @mouseenter="enterFun($event,index)" @mouseleave="leaveFun($event,index)" :class="{borderStyle:index == 0}" v-cloak="">
+
+                    <div class="weekHead">
+
+                        <span>item.dateMD&nbsp;item.weekName</span>
+                    </div>
+
+                    <div class="weekBody" v-if="item.arr &amp;&amp; item.arr.length">
+                        <div v-for="caitem in item.arr.slice(0,2)" class="flexEle urlList">
+                            <span></span>
+                            <a v-if="caitem.ffUrl" :href="caitem.ffUrl" :darkcolor="caitem.color" target="_blank">
+                                caitem.ffName
+                            </a>
+                            <a v-else="" :href="'https://www.adguider.com/s?key=' + caitem.ffName" :darkcolor="caitem.color" target="_blank">
+                                caitem.ffName
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="surplusCalendar" v-if="item.arr.length > 2" @mouseenter="showAllCalender(index)">
+                        还有<span>item.arr.length - 2}</span>项
+                    </div>
+
+                    <div class="allCalendar" @mouseleave="hideAllCalender(index)">
+                        <li v-for="calenderItem in item.arr">
+                            <a v-if="calenderItem.ffUrl" :href="calenderItem.ffUrl" :style="{'color': calenderItem.color }" target="_blank">
+                                calenderItem.ffName
+                            </a>
+                            <a v-else="" :href="'https://www.adguider.com/s?key=' + calenderItem.ffName" :style="{'color': calenderItem.color }" target="_blank">
+                                calenderItem.ffName
+                            </a>
+                        </li>
+                    </div>
+
+
+                    <div class="weekIcon weekIcon1" v-if="item.restStr === RelaxType.Relax"></div>
+                    <div class="weekIcon weekIcon2" v-else-if="item.restStr === RelaxType.Work &amp;&amp; item.restBol"></div>
+
+                </div>
+            </div>
+
+            <div class="moreCalanderPosition" id="moreCalanderPosition">
+                
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" id="adWebList">
+
+                    <div class="part nav1">
+                        <h2 id="hot0" class="moreHotCase">
+                            <strong>赛事资讯</strong>
+                        </h2>
+                       
+                        <div class="items">
+                            <div class="row">
+                                <div class="match">
+                                    {{template "home/baidu/match.html" .}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="part nav1">
+                        <h2 id="hot0" class="moreHotCase">
+                            <strong>历史上的今天</strong>
+                            <!-- <p id="intoAdgP">
+                                <span>查看更多</span>
+                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                            </p> -->
+                        </h2>
+                        <div class="items" style="padding-bottom: 10px;">
+                            <div class="row" id="hotCaseList">
+                                {{range $key ,$value := $.Histoday}}
+                                <div class="col-xs-6 col-sm-4 col-md-2 hotCase">
+                                    <a target="_blank" title="{{$value.title}}" href="{{$value.url}}">
+                                        <div class="caseIconBox">
+                                            <div style="background-image: url({{$value.img}});">
+                                            </div>
+                                        </div> 
+                                        <h3 class="">{{$value.title}}</h3>
+                                        <em class="caMediaType">{{date $.T "m月d日"}}</em>
+                                    </a> 
+                                    <!-- <p>
+                                        <i class="">Fendi</i> 
+                                        <em>暂无</em>
+                                    </p> -->
+                                </div>
+                                {{end}}
+                            </div>
+                        </div>
+                        <h2 id="more" class="moreHotCase" style="padding-top: 0px;">
+                            <img style="display: block;margin: auto;cursor: pointer;" src="/static/baidu/img/loaddown.png"></img>
+                            <script>
+                                $("#more").toggle(function(){
+                                    var str = ""
+                                    
+                                    {{range $key ,$value := $.MoreHistoday}}
+                                    str += `<div class="col-xs-6 col-sm-4 col-md-2 hotCase moreadd">
+                                        <a target="_blank" title="{{$value.title}}" href="{{$value.url}}">
+                                            <div class="caseIconBox">
+                                                <div style="background-image: url({{$value.img}});">
+                                                </div>
+                                            </div>
+                                            <h3 class="">{{$value.title}}</h3>
+                                            <em class="caMediaType">{{date $.T "m月d日"}}</em>
+                                        </a> 
+                                        </div>`
+                                    {{end}}
+                                    $("#more img").attr("src","/static/baidu/img/loadup.png")
+                                    $("#hotCaseList").append(str)
+                                },function(){
+                                    $("#more img").attr("src","/static/baidu/img/loaddown.png")
+                                    $(".moreadd").remove()
+                                })
+                            </script>
+                        </h2>
+                    </div>
+
+
+                    <div class="part nav1" id="hot1" style="margin: 0;background: none;">
+                        <div class="items" style="padding: 0;">
+                            <div class="row hotSearchListBox flexEle" style="margin: 0;" id="hotSearchListBox">
+                                <div class="hotSearchList hotMagrin" id="weibiHotlist">
+                                    <div class="hotSearchListHead flexEle flexBetweenEle">
+
+                                        <div class="flexEle">
+                                            <div>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_weibo.png" alt="">
+                                            </div>
+                                            <span>微博热搜榜</span>
+                                        </div>
+
+                                        <div class="pcHotListMore flexEle">
+                                            <a href="https://weibo.com/p/106003type=25&amp;t=3&amp;disable_hot=1&amp;filter_type=realtimehot" target="_blank" class="flexEle">
+                                                <span>查看更多</span>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <ul class="searchUl">
+                                        {{range $key ,$value := $.Weibohotnews}}
+                                        {{if lt $key 8}}
+                                        <li><a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank" style="color: rgb(60, 60, 75);">{{$value.Title}}</a></li>
+                                        {{end}}
+                                        {{end}}
+                                    </ul>
+                                </div>
+                                <div class="hotSearchList hotMagrin" id="zhihuHotlist">
+                                    <div class="hotSearchListHead flexEle flexBetweenEle">
+                                        <div class="flexEle">
+                                            <div>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_zhihu.png" alt="">
+                                            </div>
+                                            <span>知乎热搜榜</span>
+                                        </div>
+
+                                        <div class="pcHotListMore flexEle">
+                                            <a href="https://www.zhihu.com/hot" target="_blank" class="flexEle">
+                                                <span>查看更多</span>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <ul class="searchUl">
+                                        {{range $key ,$value := $.Zhihuhotnews}}
+                                        {{if lt $key 8}}
+                                        <li><a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank" style="color: rgb(60, 60, 75);">{{$value.Title}}</a></li>
+                                        {{end}}
+                                        {{end}}
+                                    </ul>
+                                </div>
+                                <div class="hotSearchList hotMagrin" id="baiduHotlist">
+                                    <div class="hotSearchListHead flexEle flexBetweenEle">
+                                        <div class="flexEle">
+                                            <div>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_baidu.png" alt="">
+                                            </div>
+                                            <span>百度热搜榜</span>
+                                        </div>
+
+                                        <div class="pcHotListMore flexEle">
+                                            <a href="http://top.baidu.com/buzz?b=1&amp;c=513&amp;fr=topcategory_c513" target="_blank" class="flexEle">
+                                                <span>查看更多</span>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <ul class="searchUl">
+                                        {{range $key ,$value := $.Baiduhotnews}}
+                                        {{if lt $key 8}}
+                                        <li><a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank" style="color: rgb(60, 60, 75);">{{$value.Title}}</a></li>
+                                        {{end}}
+                                        {{end}}
+                                    </ul>
+                                </div>
+                                <div class="hotSearchList">
+                                    <div class="hotSearchListHead flexEle flexBetweenEle">
+                                        <div class="flexEle">
+                                            <div>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_bzhan.png" alt="">
+                                            </div>
+                                            <span>b站热搜榜</span>
+                                        </div>
+
+                                        <div class="pcHotListMore flexEle">
+                                            <a href="https://www.bilibili.com/ranking/all/0/0/1" target="_blank" class="flexEle">
+                                                <span>查看更多</span>
+                                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <ul class="searchUl">
+                                        {{range $key ,$value := $.Bilibilihotnews}}
+                                        {{if lt $key 8}}
+                                        <li><a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank" style="color: rgb(60, 60, 75);">{{$value.Title}}</a></li>
+                                        {{end}}
+                                        {{end}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="part nav1">
+                        <h2 id="hot0" class="moreHotCase">
+                            <strong>热榜大全</strong>
+                            <p id="intoAdgP">
+                                <span>查看更多</span>
+                                <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                            </p>
+                        </h2>
+                        <div class="items" style="padding: 0;">
+                            <div class="row hotSearchListBox flexEle" style="margin: 0;display: block;" id="hotSearchListBox">
+                                <div class="hotSearchList hotMagrin" id="weibiHotlist" style="height: auto;">
+                                    
+                                    <ul class="searchUl" style="margin-left: 30px;margin-right: 30px;">
+                                        {{range $key ,$value := $.Hotnews}}
+                                        
+                                        <li style="border-bottom: 1px dashed #dae1ea;padding-bottom: 10px;padding-top: 10px;margin-bottom: unset;"><a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank" style="color: rgb(60, 60, 75);"><span style="color:rgb(66 133 244)">[{{$value.Category.Name}}]</span> {{$value.Title}} <span style="color: #c01e2f;font-size: 12px;">{{TemlpateTime $value.Created}}</span></a></li>
+                     
+                                        {{end}}
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div id="toMobHotList" style="padding-bottom: 30px;"></div>
+                        </div>
+                    </div>
+                    <div id="mobHotList">
+
+                        <div class="mobHotSearchList">
+                            <div class="mobListHead flexEle flexBetweenEle">
+
+                                <div class="flexEle">
+                                    <div class="listLogoBox">
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_weibo.png" alt="">
+                                    </div>
+                                    <p>微博热搜榜</p>
+                                </div>
+
+                                <div class="pcHotListMore flexEle">
+                                    <a href="https://weibo.com/p/106003type=25&amp;t=3&amp;disable_hot=1&amp;filter_type=realtimehot" target="_blank" class="flexEle">
+                                        <span>查看更多</span>
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mobListBody">
+
+                                {{range $key ,$value := $.Weibohotnews}}
+                                {{if lt $key 8}}
+                                <div class="flexEle">
+                                    <div class="mobNumBox">
+                                        <img onerror="this.style.opacity=0" src="http://cdn.adguider.com/resource/images_addog/hotSearchList/num{{$key}}.png" alt="{{$value.Title}}">
+                                    </div>
+                                    <a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank">{{$value.Title}}</a>
+                                </div>
+                                {{end}}
+                                {{end}}
+                            </div>
+                        </div>
+                        <div class="mobHotSearchList">
+                            <div class="mobListHead flexEle flexBetweenEle">
+                                <div class="flexEle">
+                                    <div class="listLogoBox">
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_zhihu.png" alt="">
+                                    </div>
+                                    <p>知乎热搜榜</p>
+                                </div>
+
+                                <div class="pcHotListMore flexEle">
+                                    <a href="https://www.zhihu.com/hot" target="_blank" class="flexEle">
+                                        <span>查看更多</span>
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mobListBody">
+                                {{range $key ,$value := $.Zhihuhotnews}}
+                                {{if lt $key 8}}
+                                <div class="flexEle">
+                                    <div class="mobNumBox">
+                                        <img onerror="this.style.opacity=0" src="http://cdn.adguider.com/resource/images_addog/hotSearchList/num{{$key}}.png" alt="{{$value.Title}}">
+                                    </div>
+                                    <a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank">{{$value.Title}}</a>
+                                </div>
+                                {{end}}
+                                {{end}}
+                            </div>
+                        </div>
+                        <div class="mobHotSearchList">
+                            <div class="mobListHead flexEle flexBetweenEle">
+                                <div class="flexEle">
+                                    <div class="listLogoBox">
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_baidu.png" alt="">
+                                    </div>
+                                    <p>百度热搜榜</p>
+                                </div>
+
+                                <div class="pcHotListMore flexEle">
+                                    <a href="http://top.baidu.com/buzz?b=1&amp;c=513&amp;fr=topcategory_c513" target="_blank" class="flexEle">
+                                        <span>查看更多</span>
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mobListBody">
+                                {{range $key ,$value := $.Baiduhotnews}}
+                                {{if lt $key 8}}
+                                <div class="flexEle">
+                                    <div class="mobNumBox">
+                                        <img onerror="this.style.opacity=0" src="http://cdn.adguider.com/resource/images_addog/hotSearchList/num{{$key}}.png" alt="{{$value.Title}}">
+                                    </div>
+                                    <a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank">{{$value.Title}}</a>
+                                </div>
+                                {{end}}
+                                {{end}}
+                            </div>
+                        </div>
+                        <div class="mobHotSearchList">
+                            <div class="mobListHead flexEle flexBetweenEle">
+                                <div class="flexEle">
+                                    <div class="listLogoBox">
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_bzhan.png" alt="">
+                                    </div>
+                                    <p>b站热搜榜</p>
+                                </div>
+
+                                <div class="pcHotListMore flexEle">
+                                    <a href="https://www.bilibili.com/ranking/all/0/0/1" target="_blank" class="flexEle">
+                                        <span>查看更多</span>
+                                        <img onerror="this.style.opacity=0" src="/static/baidu/img/icon_addog_morecase.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mobListBody">
+                                {{range $key ,$value := $.Bilibilihotnews}}
+                                {{if lt $key 8}}
+                                <div class="flexEle">
+                                    <div class="mobNumBox">
+                                        <img onerror="this.style.opacity=0" src="http://cdn.adguider.com/resource/images_addog/hotSearchList/num{{$key}}.png" alt="{{$value.Title}}">
+                                    </div>
+                                    <a href="{{$value.Rurl}}" title="{{$value.Title}}" target="_blank">{{$value.Title}}</a>
+                                </div>
+                                {{end}}
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>
+                <a title="Gooooooooogle 搜索" href="http://gooooooooogle.cn"><img src="http://gooooooooogle.cn/static/baidu/img/gooooooooogle_460x71.png" style="width: 148px;"></a>
+            </p>
+        </div>
+    </div>
+
+
+
+    <div class="tipsInfo">
+        <p>使用电脑体验效果更佳 👨🏼‍💻</p>
+        <div class="prg-cont rad-prg" id="indicatorContainer2"></div>
+        <div class="imgBox">
+            <img onerror="this.style.opacity=0" class="closeImg" src="/static/baidu/img/icon_addog_close2x.png">
+        </div>
+    </div>
+    <div class="tipsPopup">
+        <p id="tipsPopupOne"></p><br>
+        <p id="tipsPopupTwo"></p>
+    </div>
+
+    <script>
+        $('body').on('DOMNodeInserted', function(e) {
+            if ($(e.target).hasClass('lxb-container')) {
+                $('.lxb-container').remove();
+            }
+            if ($(e.target).hasClass('lxb-close-btn')) {
+                $('.lxb-close-btn').remove();
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/static/baidu/js/base.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/radialIndicator.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/qrcode.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/iscroll-zoom.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/hammer.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/lrz.all.bundle.js"></script>
+
+    <script type="text/javascript" src="/static/baidu/js/addog.photoClip.js"></script>
+    <script type="text/javascript" src="/static/baidu/js/iscroll.js"></script>
+
+
+</body>
+
+</html>

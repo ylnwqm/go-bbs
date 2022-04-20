@@ -1,0 +1,133 @@
+﻿body{background:#f2f5f9;font-size:14px;min-width:1300px}
+.container{width:100%;margin:0 auto;}
+.fl,.left{float:left}
+.fr,.right{float:right}
+input{ -webkit-appearance: none; }
+
+@keyframes searchLights{0%{left:-200%;top:0}
+to{left:100%;top:100px}
+}
+
+@keyframes pop-in{0%{transform:scale(.1,.1);opacity:.1}
+80%{transform:scale(1.1,1.1)}
+100%{transform:scale(1,1);opacity:1}
+}
+
+.title{font-size:20px;font-weight:800;margin-bottom:20px}
+.title span{font-size:14px;color:#888;font-weight:100}
+.title .more{font-size:14px;color:#888;font-weight:400;line-height: 30px;background: #fff; padding: 0 10px; border-radius: 5px;}
+.title .more i{margin-left:10px;}
+
+.pages{text-align:center;display:block;font-size:14px;margin:10px 0 0;color:#666}
+.pages li{display:inline}
+.pages li a{padding:unset;border:1px solid #007bf5;border-radius:21px;width:30px;height:30px;display:inline-block;line-height:30px;color:#007bf5;margin:15px 5px 0 5px}
+.pages li a:hover{color:#1b8eff}
+.pages .thisclass a{background:#1b8eff;color:#fff;border-color:#1b8eff}
+.pages .thisclass a:hover{color:#fff}
+.pages .no-result{min-height:300px;padding-top:70px}
+.pages .no-result h2{display:block;text-align:center;line-height:40px;font-size:22px;font-weight:700;color:#333}
+.pages .no-result h2 span{display:block;font-size:14px;font-weight:400}
+.pages .no-result .search-box{margin:20px auto;position:relative;width:50%}
+.pages .no-result .search-box input.txt{height:40px;width:100%;text-indent:30px;line-height:40px;border:0;border-radius:5px;color:#5f5f5f;background:#fff;border:1px solid #f1f1f1;font-size:14px}
+.pages .no-result .search-box input[type=submit]{position:absolute;top:1px;right:10px;background:0 0;border:0;width:30px;height:40px;line-height:40px;cursor:pointer;font-size:16px;color:#888}
+.right.public{width:370px}
+.right.public .ad{width:100%;border-radius:5px;background:#fff;overflow:hidden;transition:all .3s;margin-bottom:20px}
+.right.public .ad:hover{-webkit-box-shadow:0 34px 20px -24px rgba(0,0,0,.1);box-shadow:0 34px 20px -24px rgba(0,0,0,.1);-webkit-transform:translateY(-5px)}
+.right.public .ad img{width:100%}
+.right.public .cnxh,.right.public .rmrj{margin-top:20px}
+.right.public .cnxh ul,.right.public .rmrj ul{border-radius:5px;background:#fff;padding:10px}
+.right.public .cnxh ul li{line-height:30px}
+.right.public .cnxh ul li a{width:calc(100% - 65px);text-overflow:ellipsis;white-space:nowrap;overflow:hidden;position:relative;font-size:14px;padding-left:20px}
+.right.public .cnxh ul li a:before{content:'';width:5px;height:2px;left:5px;background:#e2e2e2;position:absolute;top:7px;border-radius:5px;z-index:1}
+.right.public .cnxh ul li:nth-child(1) a:before{background:#ff5722}
+.right.public .cnxh ul li:nth-child(2) a:before{background:#ffdb03}
+.right.public .cnxh ul li:nth-child(3) a:before{background:#1b8eff}
+.right.public .rmrj li{overflow:hidden;margin:5px 0;padding-bottom:5px}
+.right.public .rmrj li .img{width:40px;height:40px;overflow:hidden;border-radius:10px;border:1px solid #f1f1f1;float:left;margin-right:10px;margin-left:5px}
+.right.public .rmrj li .img img{width:100%;height:100%}
+.right.public .rmrj li .tit{float:left;width:calc(100% - 70px);padding-top:4px}
+.right.public .rmrj li .tit h4{font-size:14px;line-height:18px;margin-bottom:0;font-weight:400;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.right.public .rmrj li .tit span{font-size:12px;color:#999;line-height:20px}
+.right.public .rmrj li:last-child{border-bottom:0;padding-bottom:0}
+.right.public .r-list{border-radius:5px;background:#fff;padding:15px;margin-bottom:20px}
+.right.public .r-list .bar{height:35px;border-bottom:1px solid #fbfbfb}
+.right.public .r-list .bar li{float:left;height:34px;padding:0 5px;cursor:pointer;font-size:16px;line-height:29px;width: 103px;text-align: center;}
+.right.public .r-list .bar li.sel{border-bottom:2px solid #007bf5}
+.right.public .r-list .bd{display:none;margin-top:10px}
+.right.public .r-list .bd.sel{display:block}
+.right.public .r-list .order li{height: 40px;line-height:30px;overflow: hidden;}
+.right.public .r-list .order li a{width: calc(100% - 65px);text-overflow:ellipsis;white-space:nowrap;overflow:hidden;position:relative;font-size:14px;}
+.right.public .r-list .order li:nth-child(1) a i{background:#007bf5;color:#fff}
+.right.public .r-list .order li:nth-child(2) a i{background:#389cff;color:#fff}
+.right.public .r-list .order li:nth-child(3) a i{background:#87c3ff;color:#fff}
+.right.public .r-list .order li:nth-child(4) a i{background:#bedfff;color:#fff}
+.right.public .r-talk{border-radius:5px;background:#fff;padding:15px}
+.right.public .r-talk ul li{padding:0 0 12px;border-bottom:1px solid #f6f6f6;margin-bottom:5px!important;padding-right:0!important}
+.right.public .r-talk ul li:last-child{border:none;margin-bottom:0!important;padding:0}
+.right.public .r-talk ul .right.public .r-talk ul .info{padding:0!important;line-height:32px}
+.right.public .r-talk ul .info img{width:30px;height:30px;margin-right:6px;border-radius:50%;border:1px solid #fbfbfb}
+.right.public .r-talk ul .info span:nth-child(2){vertical-align:top;line-height:32px;color:#666}
+.right.public .r-talk ul .info span:last-child{float:right;line-height:32px;color:#999;font-size:13px}
+.right.public .r-talk ul .excerpt{position:relative;padding:5px 10px;background:#f6f6f6;color:#666;margin-top:8px;border-radius:5px}
+.right.public .r-talk ul .excerpt:before{position:absolute;left:10px;top:-10px;content:'';width:0;height:0;line-height:0;border:5px solid transparent;border-bottom-color:#f5f5f5}
+.right.public .r-talk ul .excerpt p{margin:0;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:normal;-webkit-box-orient:vertical;display:-webkit-box;-webkit-line-clamp:2}
+.right.public .r-talk ul .excerpt p a{font-size:15px!important;line-height:25px!important;height:25px!important}
+.right.public .r-talk ul .excerpt p img{width:30px;}
+.right.public .r-talk ul .post{color:#999;margin-top:9px;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal}
+.right.public .r-talk ul .post a{color:#999;display:inline!important;font-size:13px!important}
+.right.public .r-list .order a i{display:inline-block;vertical-align:middle;font-style:normal;margin-right: 10px;background: #f2f5f9;width:20px;text-align:center;border-radius:5px;color:#696969;font-size:12px;height:20px;line-height:20px;margin-top:-2px;}
+.right .sjmh{width: 290px;background:#fff;margin: 0 auto 20px;position:relative;z-index:999;border-radius:10px;padding:40px;text-align:center;}
+.right .sjmh h4{font-size:20px;font-weight:bold;}
+.right .sjmh #btn{border:0;padding:5px 30px;line-height:30px;border-radius:5px;background:#007bf5;color:#fff}
+.right .sjmh .search{margin:20px auto;position:relative}
+.right .sjmh .search input.txt{height:40px;width:100%;text-indent:30px;line-height:40px;border:0;border-radius:5px;color:#5f5f5f;background:#fff;border:1px solid #f1f1f1;font-size:14px}
+.right .sjmh .search input[type=submit]{position:absolute;top:1px;right:10px;background:0 0;border:0;width:30px;height:40px;line-height:40px;cursor:pointer;font-size:16px;color:#888;display:none;}
+.right .game_link{width:100%;border-radius:5px;background:#fff;padding:30px 10px 20px;box-sizing:border-box;margin-bottom:20px;}
+.right .game_link li{float:left;width:25%;text-align:center;line-height:35px}
+.right .game_link li img{width:58px;height:58px;overflow:hidden;border-radius:15px;display:block;margin:auto;border:1px solid #f6f6f6}
+.fix-bottom{position:fixed;bottom:20px;left:50%;z-index:1000;margin-left:280px;width:370px}
+.at-bottom{position:absolute;bottom:0;top:initial;z-index:1000;right:0;width:370px}
+body .backtop{display:none;position:fixed;bottom:19px;left:53%;width:59px;background:#fff;text-align:center;line-height:50px;color:#333;height:50px;font-size:21px;border-radius:9px;transform:translate(625px,0);cursor:pointer}
+.loadding{width:57px;z-index:98;text-align:center;transform:translate(-50%,-50%);margin:auto}
+.loadding span{display:inline-block;width:8px;height:100%;border-radius:4px;background:#007bf5;-webkit-animation:load 1.04s ease infinite}
+@-webkit-keyframes load{0%,100%{height:10px;background:#007bf5}
+50%{height:30px;margin-top:-20px;background:#7bf}
+}
+.loadding span:nth-child(2){-webkit-animation-delay:.13s}
+.loadding span:nth-child(3){-webkit-animation-delay:.26s}
+.loadding span:nth-child(4){-webkit-animation-delay:.39s}
+.loadding span:nth-child(5){-webkit-animation-delay:.52s}
+.google-ad{text-align:center;margin:10px 0;}
+@media screen and (max-width:800px){body{min-width:100%}
+.container{width:98%;margin:auto}
+
+.pages{margin:0}
+.pages li a{margin:5px}
+
+body .backtop{display:none}
+
+body.night .article-about .menu li,body.night .layui-nav .layui-nav-item,body.night .list-nav li,body.night .site-nav li{background:#252525}
+.pages .no-result .search-box{width:90%}
+.m-hidde{display:none;}
+
+@font-face{font-family:iconfont;src:url(../fonts/font_2372324_06j8zt9in68.woff2) format('woff2'),url(../fonts/font_2372324_06j8zt9in68.woff) format('woff'),url(../fonts/font_2372324_06j8zt9in68.ttf) format('truetype')}
+.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.icon-Daytimemode:before{content:"\e821"}
+.icon-shoucang1:before{content:"\e663"}
+.icon-xiugai:before{content:"\e65b"}
+.icon-yonghu:before{content:"\e607"}
+.icon-pinglun:before{content:"\e61c"}
+.icon-user:before{content:"\e63c"}
+.icon-shoucang:before{content:"\e629"}
+.icon-haibao:before{content:"\e613"}
+.icon-guanbi:before{content:"\e608"}
+.icon-sousuo:before{content:"\e658"}
+.icon-nightmode:before{content:"\e764"}
+body.night,body.night #search,body.night #searchBox .layui-layer,body.night .article-body blockquote,body.night .article-body h5,body.night .article-down ul li,body.night .article-foot a,body.night .article-tags a,body.night .copyright,body.night .index-news-list ul li,body.night .list-article-plate .fr li:hover a,body.night .list-main .article>ul .tit span,body.night .list-main .left>ul li span,body.night .list-main .left>ul li:after,body.night .night-black,body.night .qy-comment .b-box-textarea .b-box-textarea-body,body.night .right.public .r-talk ul .excerpt,body.night .site-body p.image b,body.night .site-info .body article,body.night .site-info .data,body.night .site-info .link .url,body.night .site-info .link .zan,body.night .site-info .tit span a,body.night .site-info .web .fl li span,body.night .site-menu li a.hover,body.night .site-menu li a:hover,body.night .site-more ul li,body.night .tool-video .layui-input,body.night .user-box .layui-input,body.night .user-comment .list ul li p,body.night .user-info .data ul li,body.night .user-info .list li span,body.night .index-user-info ul,body.night .hot-soft .plate-list li p span a,body.night .list-main .soft.list>ul li:after,body.night .list-main .soft.list>ul li span,body.night .qy-comment .comm_list ul.list li.entry ul.reply,body.night .site-menu a:hover,body.night .article-filepage p,body.night header .user-open .user-open-info,body.night .article-tit .collect,body.night .right .sjmh .search input.txt{background:#323335}
+body.night #search .search input.txt,body.night #search p a,body.night .article-about .menu,body.night .article-about .right,body.night .article-body,body.night .article-main .left,body.night .article-tit,body.night .backtop,body.night .index-link ul,body.night .index-list .list-article-main,body.night .index-list .list-soft-main,body.night .index-login,body.night .index-news .page,body.night .index-news-list,body.night .index-quan .li-quan,body.night .index-tool-list,body.night .list-main .fl,body.night .list-main .left,body.night .list-main .soft>ul .list-btn,body.night .list-nav,body.night .night-bg,body.night .right.public .cnxh ul,body.night .right.public .r-list,body.night .right.public .r-talk,body.night .right.public .rmrj ul,body.night .shop-list .li-quan,body.night .site-body,body.night .site-info,body.night .site-list ul li,body.night .site-list-box ul li,body.night .site-list-box ul li a,body.night .site-menu,body.night .site-more,body.night .site-nav,body.night .site-pinglun,body.night .user-box,body.night .user-login .layui-input,body.night .user-login .login,body.night .user-menu li.hover,body.night header,body.night header nav,body.night .title .more,body.night .index-news .title .mun,body.night .index-info .r-list,body.night .index-quan .list-course-main,body.night .article-filepage,body.night header .user-open .user-open-info .user-open-ul a b,body.night .right .sjmh,body.night .right .game_link, body.night .layui-layer-title, body.night .layui-layer,body.night  .right .soft_info{background:#292a2d}
+body.night,body.night .article-about .menu li a,body.night .article-about .right h2,body.night .article-body h2,body.night .article-body h3,body.night .article-body h5,body.night .article-body p,body.night .article-down ul li a,body.night .article-foot a,body.night .article-tags a,body.night .article-tit h1,body.night .hot-soft .plate-list li .txt,body.night .index-ad-txt ul a,body.night .index-login .wdl,body.night .index-news-list ul li .tit,body.night .index-quan .li-quan .desc-wrap .product-title-wrap .product-title,body.night .index-tool-list li a,body.night .list-article-plate .fr li a,body.night .list-article-tab .type a,body.night .list-main .article>ul .info .detail,body.night .list-main .article>ul .tit a,body.night .list-main .left>ul li .tit,body.night .list-main .soft>ul .soft-title,body.night .list-nav li a,body.night .list-soft-plate .plate-list li .fr h3 a,body.night .list-soft-tab .type a,body.night .night-color,body.night .qy-comment .qy-comment-title,body.night .right.public .cnxh ul li a,body.night .right.public .r-list .order li a,body.night .right.public .r-talk ul .excerpt a,body.night .right.public .rmrj ul,body.night .right.public .rmrj ul a,body.night .shop-list .li-quan .desc-wrap .product-title-wrap .product-title,body.night .site-info .link a,body.night .site-info .tit span a,body.night .site-info .web .fl li,body.night .site-info .web .fl li a,body.night .site-list ul li a h3,body.night .site-list-box ul li a,body.night .site-menu li a,body.night .site-more ul li h3,body.night .site-nav li a,body.night .tags-page h2,body.night .title,body.night .tool-video .layui-input,body.night .user-box .layui-input,body.night .user-login .layui-input,body.night .user-menu li a,body.night header .layui-nav .layui-nav-item a,body.night header .night-open a,body.night header .search-open,body.night .user-stow .list .txt .tit,body.night .list-main .soft.list>ul li .tit,body.night .site-menu a,body.night .index-info .r-list .order li a,body.night .article-filepage p,body.night header .user-open a,body.night header .user-open .user-open-info,body.night header .user-open .user-open-info .user-open-name .xm em,body.night header .user-open .user-open-info .user-open-ul a,body.night .article-tit .collect,body.night .right .game_link li a,body.night .right .sjmh .search input.txt, body.night .layui-layer-title,body.night  .right .soft_info,body.night .right .soft_info .num{color:#c0c4cc}
+body.night #newdigg a,body.night #search .search input.txt,body.night .article-down .title,body.night .article-down ul li,body.night .article-pinglun .title,body.night .article-tags,body.night .article-tit .info,body.night .copyright,body.night .hot-soft .type,body.night .index-news-list ul li font,body.night .index-news-list ul li span,body.night .list-article-plate .fr,body.night .list-article-plate .fr li:hover a,body.night .list-article-tab .type,body.night .list-main .article>ul .tit span,body.night .list-main .article>ul li,body.night .list-main .left>ul li,body.night .list-main .left>ul li span,body.night .list-main .soft>ul .list-img,body.night .list-main .soft>ul li,body.night .list-soft-plate .plate-list li,body.night .list-soft-plate .plate-list li .fl,body.night .list-soft-tab .type,body.night .night-border,body.night .right.public .r-list .bar,body.night .right.public .r-talk ul li,body.night .right.public .rmrj ul .img,body.night .site-info .tit,body.night .site-info .web .fl li,body.night .site-list ul li a .img,body.night .site-list-box ul li .tit,body.night .site-more .title,body.night .site-more ul li,body.night .site-more ul li .tit,body.night .site-more ul li a .img,body.night .site-nav li a,body.night .site-pinglun .title,body.night .tool-video .layui-input,body.night .user-box .layui-input,body.night .user-login .layui-input,body.night footer .footer ul li, body.night .user-stow .list ul li, body.night .user-stow .list .img,body.night .index-user-info li,body.night .list-main .soft.list>ul li,body.night .list-main .soft.list>ul li,body.night .list-main .soft.list>ul li span,body.night .list-main .soft.list>ul li .img,body.night .hot-soft .plate-list li .img,body.night .index-tool-list li img,body.night .index-info .r-list .bar,body.night .list-course-tab .type,body.night .index-quan .li-quan,body.night .article-filepage blockquote,body.night header .user-open .user-open-info .user-open-ul,body.night .right .game_link li img,body.night .right .sjmh .search input.txt, body.night .layui-layer-title{border-color:#565656}
+body.night .qy-comment .b-emote-submit,body.night .user{background:#3a3a3a}
+body.night .right.public .r-talk ul .excerpt:before{border-bottom-color:#252525}
+body.night header .user-open .user-open-info i{border-bottom-color:#323335}
+body.night .layui-layer-close1 {background: url(../images/layui_icon.png) no-repeat;   background-position: 1px -40px; }

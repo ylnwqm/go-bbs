@@ -1,0 +1,84 @@
+<aside class="box_r">
+    <div class="search">
+      <form action="/search" method="get" name="searchform" id="searchform">
+        <input name="q" id="keyboard" class="input_text" placeholder="请输入关键字词" value="{{$.q}}" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      </form>
+    </div>
+    <section>
+      <h2>站长推荐</h2>
+      
+      <ul class="news_part03">
+        {{range $k,$v := $.ArticlesRecommend}}
+          <li>
+            <a href="/detail/{{$v.Id}}.html" title="{{$v.Title}}" target="_blank">
+              {{if ne $v.Cover ""}}
+              <i><img src="{{$v.Cover}}" alt="{{$v.Title}}"></i>
+              {{end}}
+              <p>{{$v.Title}}</p>
+            </a>
+          </li>
+          {{end}}
+      </ul>
+    </section>
+    <section>
+      <h2>热门点击</h2>
+      <ul class="news_part06">
+        {{range $k,$v := $.ArticlesReadSort}}
+        <li>
+            <a title="{{$v.Title}}" href="/detail/{{$v.Id}}.html" target="_blank">
+                {{$v.Title}}({{$v.Pv}})
+            </a>
+        </li>
+        {{end}}
+      </ul>
+    </section>
+    <!-- <section>
+      <h2>猜你喜欢</h2>
+      <ul class="news_part05">
+                <li><a href="/life/4.html" title="平凡生活中自见伟大,快手上的他们无不传递着温暖" target="_blank"><i><img src="static/picture/b11.jpg" alt="平凡生活中自见伟大,快手上的他们无不传递着温暖"></i>
+          <p>平凡生活中自见伟大,快手上的他们无不传递着温暖</p>
+          </a></li>
+                <li><a href="/sun/10.html" title="遇见你,是我平凡人生中最美的事情" target="_blank"><i><img src="static/picture/b10.jpg" alt="遇见你,是我平凡人生中最美的事情"></i>
+          <p>遇见你,是我平凡人生中最美的事情</p>
+          </a></li>
+                <li><a href="/sun/3.html" title="2020:努力工作,向生活重新出发!" target="_blank"><i><img src="static/picture/b03.jpg" alt="2020:努力工作,向生活重新出发!"></i>
+          <p>2020:努力工作,向生活重新出发!</p>
+          </a></li>
+                <li><a href="/life/7.html" title="世界上最永恒的幸福就是平凡，人生中最长久的拥有就是珍惜。" target="_blank"><i><img src="static/picture/cbcce9c24e92545074039d1620f19254.jpg" alt="世界上最永恒的幸福就是平凡，人生中最长久的拥有就是珍惜。"></i>
+          <p>世界上最永恒的幸福就是平凡，人生中最长久的拥有就是珍惜。</p>
+          </a></li>
+                <li><a href="/meet/8.html" title="理性精致穷,平凡人生的“见世面”之旅" target="_blank"><i><img src="static/picture/b04.jpg" alt="理性精致穷,平凡人生的“见世面”之旅"></i>
+          <p>理性精致穷,平凡人生的“见世面”之旅</p>
+          </a></li>
+                <li><a href="/meet/5.html" title="因为旅行，可以为平凡的生活加点料，挽救日渐枯萎的心。" target="_blank"><i><img src="static/picture/b12.jpg" alt="因为旅行，可以为平凡的生活加点料，挽救日渐枯萎的心。"></i>
+          <p>因为旅行，可以为平凡的生活加点料，挽救日渐枯萎的心。</p>
+          </a></li>
+              </ul>
+    </section> -->
+    <section>
+      <h2>友情链接</h2>
+      <ul class="links">
+        <li>
+          <a href="https://nihongdengxia.com/" style="color: red;" title="霓虹灯下社区" target="_blank">霓虹灯下社区</a>
+      </li>
+        {{range $k ,$v := $.Link}}
+          <li>
+              <a href="{{$v.Url}}" title="{{$v.Title}}" target="_blank">{{$v.Title}}</a>
+          </li>
+        {{end}}
+        
+      </ul>
+    </section>
+    <section>
+      <ul class="copyright">
+        <p>© 2020-{{date .T "Y"}} clblog.club</p>
+        <p>版权所有：<a href="/" target="_blank">陈立个人博客</a> </p>
+        <p>技术支持：<a href="https://github.com/1920853199/go-blog" target="_blank">Go Blog</a> </p>
+        <p>
+          <!-- <a href="/sitemap.xml" target="_blank">XML网站地图</a>  -->
+          <a href="/time.html" target="_blank">往期文章</a> </p>
+          <script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1280419357'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1280419357%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+      </ul>
+    </section>
+  </aside>

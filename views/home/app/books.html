@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="keywords" content="{{$.keyword}}" />
+<meta name="description" content="{{$.description}}" />
+<title>{{$.Username}}的书架 - 霓虹灯下社区</title>
+<link rel="stylesheet" href="/static/nihongdengxia/index/css/layui.css">
+<link rel="stylesheet" href="/static/lib/basicContext/css/basicContext.min.css">
+<link rel="stylesheet" href="/static/lib/basicContext/css/default.min.css">
+<script type='text/javascript' src='/static/js/jquery-2.2.0.min.js'></script>
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_YbILrRYZIl1t07oBWTdspsTkGUFCVebFGrvfMxtkdU4',{api_host:'https://app.posthog.com'})
+</script>
+</head>
+<body>
+
+<style>
+
+    .title {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+    .titledete {
+        font-size: 18x;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #fff;
+    }
+    .booktitle{
+            margin-top: 14px;
+            font-size: 15px;
+            color: #b2b4b8;
+            line-height: 18px;
+            overflow: hidden;
+            height: 36px;
+            display: -webkit-box;
+            display: -moz-box;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -moz-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            -webkit-text-size-adjust: none;
+            box-orient: vertical;
+            height: auto;
+            max-height: 36px;
+    }
+    .ah:hover .booktitle{
+        color: #f7f7f7;
+    }
+    .ah:hover{
+         text-decoration: none !important;
+    }
+    .ah div:first-child {
+        border: 1px solid #fff;
+        box-sizing: border-box;
+        width: 128px;
+        height: 185px;
+        box-shadow: 0 2px 16px rgb(0 0 0 / 8%);
+    }
+    .ah div:first-child img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .selecteddiv{
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px #e9e9e2 solid;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+    .layui-form-item{
+        margin-bottom: unset;
+    }
+    .layui-input-block{
+        margin-left: unset;
+        min-height: unset;
+        margin-bottom: unset;
+    }
+    .layui-input-block select {
+        max-width: 100%;
+        padding: 5px 10px;
+        border: #626466 1px solid;
+        border-radius: 3px;
+        background-color: #fff;
+    }
+    .shelfBook_placeholder{
+        width: 135px;
+        height: 0;
+        display: block;
+    }
+    .container{
+        padding: 1.5em 1.5em 0;
+    }
+</style>
+
+    <div id="wrap" class="container clearfix" style="margin-bottom: 50px;">
+    
+    <div class="selecteddiv">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <select name="year" class="yearSelect" lay-verify="required">
+                    {{range $k,$v := $.AllYear}}
+                    <option {{if eq $.Year $v}}selected{{end}} value="{{$v}}">{{$k}}</option>
+                    {{end}}
+                </select>
+            </div>
+            <div class="layui-inline">
+                所有已读书籍：{{$.AllYearCount}} 本，{{$.YearStr}}已读书籍：{{$.YearReadedCount}}本，在读书籍：{{$.YearReadingCount}}本 {{if .IsLogin}}{{if ne $.Customer.Id $.Customerid}}<span><a href="/books.html?customer_id={{$.Customer.Id}}">查看我的书架</a></span>{{end}}{{end}}
+            </div>
+        </div>
+    </div>
+    
+    {{range $sk,$sv := $.BooksSort}}
+        {{range $readStatuskey ,$readStatusBooks := $sv}}
+            
+            <div class="title">
+                {{$readStatuskey}}
+            </div>
+
+            
+            <div id="wrap" class="container clearfix" style="border-radius: 5px;box-sizing: border-box;background: #1f2022;margin-bottom: 20px;padding-bottom: 20px;">
+                {{range $readDateSortKey ,$readDateSort := $.SortDateSclie}}
+                {{range $readDate ,$readDateBooks := $readStatusBooks}}
+                {{if eq $readDateSort $readDate}}
+                <div class="titledete">{{$readDate}}</div>
+                <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-between;">
+                    {{range $key ,$books := $readDateBooks}}
+                    
+                        <div data-id="{{$books.Id}}" class="col-md-2 col-sm-6 col-xs-12 book-item" style="width: 135px;height: auto;margin-bottom: 44px;">
+                            <a class="ah" href="{{$books.EbookUrl}}">
+                                <div>
+                                    <img style="width: 100%;" src="{{$books.Image}}" alt="书籍封面">
+                                    <div></div><span></span>
+                                </div>
+                                <div class="booktitle">{{$books.Title}}</div>
+                            </a>
+                        </div>
+                    
+                    {{end}}
+                    <span class="shelfBook_placeholder"></span>
+                    <span class="shelfBook_placeholder"></span>
+                    <span class="shelfBook_placeholder"></span>
+                    <span class="shelfBook_placeholder"></span>
+                    <span class="shelfBook_placeholder"></span>
+                    <span class="shelfBook_placeholder"></span>
+                    <span class="shelfBook_placeholder"></span>
+                </div>
+                {{end}}
+                {{end}}
+                {{end}}
+            </div>
+        {{end}}
+    {{end}}
+
+</div>
+
+
+<div data-method="setTop" id="addbooks" style="position: fixed;cursor: pointer;
+    bottom: 240px;
+    left: 60px;
+    border-radius: 50%;
+    border: 1px solid #1f2022;
+    padding: 10px;
+    background-color: #1f2022;display: none;">
+    <i class="layui-icon layui-icon-addition" style="font-size: 40px;color: #f2f5f9;"></i>
+</div>
+
+<div data-method="setLike" id="setLike" style="position: fixed;cursor: pointer;
+    bottom: 80px;
+    left: 60px;
+    border-radius: 50%;
+    border: 1px solid #1f2022;
+    padding: 10px;
+    background-color: #1f2022;">
+    <i class="layui-icon" style="font-size: 40px;color: #f2f5f9;">
+    <svg t="1648108505519" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2240"
+        width="41" height="35">
+        <path
+            d="M190.193225 471.411583c14.446014 0 26.139334-11.718903 26.139334-26.13831 0-14.44499-11.69332-26.164916-26.139334-26.164916-0.271176 0-0.490164 0.149403-0.73678 0.149403l-62.496379 0.146333c-1.425466-0.195451-2.90005-0.295735-4.373611-0.295735-19.677155 0-35.621289 16.141632-35.621289 36.114522L86.622358 888.550075c0 19.949354 15.96767 35.597753 35.670407 35.597753 1.916653 0 3.808746 0.292666 5.649674 0l61.022819 0.022513c0.099261 0 0.148379 0.048095 0.24764 0.048095 0.097214 0 0.146333-0.048095 0.24457-0.048095l0.73678 0 0-0.148379c13.413498-0.540306 24.174586-11.422144 24.174586-24.960485 0-13.55983-10.760065-24.441669-24.174586-24.981974l0-0.393973-50.949392 0 1.450025-402.275993L190.193225 471.409536z"
+            p-id="2241" fill="{{if $.Exist}}#ee7121{{else}}#ffffff{{end}}"></path>
+        <path
+            d="M926.52241 433.948343c-19.283182-31.445176-47.339168-44.172035-81.289398-45.546336-1.77032-0.246617-3.536546-0.39295-5.380544-0.39295l-205.447139-0.688685c13.462616-39.059598 22.698978-85.58933 22.698978-129.317251 0-28.349675-3.193739-55.962569-9.041934-82.542948l-0.490164 0.049119c-10.638291-46.578852-51.736315-81.31498-100.966553-81.31498-57.264215 0-95.466282 48.15065-95.466282 106.126063 0 3.241834-0.294712 6.387477 0 9.532097-2.996241 108.386546-91.240027 195.548698-196.23636 207.513194l0 54.881958-0.785899 222.227314 0 229.744521 10.709923 0 500.025271 0.222057 8.746198-0.243547c19.35686 0.049119 30.239721-4.817726 47.803749-16.116049 16.682961-10.761088 29.236881-25.50079 37.490869-42.156122 2.260483-3.341095 4.028757-7.075139 5.106298-11.20111l77.018118-344.324116c1.056052-4.053316 1.348718-8.181333 1.056052-12.160971C943.643346 476.446249 938.781618 453.944769 926.52241 433.948343zM893.82573 486.837924l-82.983993 367.783411-0.099261-0.049119c-2.555196 6.141884-6.879688 11.596106-12.872169 15.427364-4.177136 2.727111-8.773827 4.351098-13.414521 4.964058-1.49812-0.195451-3.046383 0-4.620227 0l-477.028511-0.540306-0.171915-407.408897c89.323375-40.266076 154.841577-79.670527 188.596356-173.661202 0.072655 0.024559 0.124843 0.049119 0.195451 0.072655 2.99931-9.137101 6.313799-20.73423 8.697079-33.164331 5.551436-29.185716 5.258771-58.123792 5.258771-58.123792-4.937452-37.98001 25.940812-52.965306 44.364417-52.965306 25.304316 0.860601 50.263777 33.656541 50.263777 52.326762 0 0 5.600555 27.563776 5.649674 57.190537 0.048095 37.366026-4.6673 56.847729-4.6673 56.847729l-0.466628 0c-5.872754 30.879288-16.214287 60.138682-30.464849 86.964654l0.36839 0.342808c-2.358721 4.815679-3.709485 10.220782-3.709485 15.943111 0 19.922748 19.088754 21.742187 38.765909 21.742187l238.761895 0.270153c0 0 14.666024 0.465604 14.690584 0.465604l0 0.100284c12.132318-0.638543 24.221658 5.207605 31.100322 16.409738 5.504364 9.016351 6.437619 19.6045 3.486404 28.988218L893.82573 486.837924z"
+            p-id="2242" fill="{{if $.Exist}}#ee7121{{else}}#ffffff{{end}}"></path>
+        <path
+            d="M264.827039 924.31872c0.319272 0.024559 0.441045 0.024559 0.295735-0.024559 0.243547-0.048095 0.367367-0.074701-0.295735-0.074701s-0.539282 0.026606-0.271176 0.074701C264.43409 924.343279 264.532327 924.343279 264.827039 924.31872z"
+            p-id="2243" fill="{{if $.Exist}}#ee7121{{else}}#ffffff{{end}}"></path>
+    </svg>
+    </i>
+</div>
+<div style="position: fixed;cursor: pointer;
+    bottom: 80px;
+    left: 120px;
+    line-height: 41px;
+    padding: 10px;
+    color: #000;">{{$.LikeCount}}人觉得很赞</div>
+
+<div data-method="setReview" id="setReview" style="position: fixed;cursor: pointer;
+    bottom: 80px;
+    left: 60px;
+    border-radius: 50%;
+    border: 1px solid #1f2022;
+    padding: 10px;
+    background-color: #1f2022;display: none;">
+    <i class="layui-icon" style="font-size: 40px;color: #f2f5f9;">
+        <svg t="1648109346307" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4458"
+            width="41" height="35">
+            <path d="M288 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="4459" fill="#ffffff"></path>
+            <path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="4460" fill="#ffffff"></path>
+            <path d="M736 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="4461" fill="#ffffff"></path>
+        </svg>
+    </i>
+</div>
+
+</body>
+</html>
+
+<script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['layer'], function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        //触发事件
+        var active = {
+            setTop: function () {
+                var that = this;
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , skin: 'layui-layer-rim' //加上边框
+                    , title: '添加书籍'
+                    , area: ['490px', '360px']
+                    , shade: 0
+                    , maxmin: false
+                    , content: ['https://nihongdengxia.com/select/books']
+
+                    //, btn: ['继续弹出', '全部关闭'] //只是为了演示
+                    // , yes: function () {
+                    //     $(that).click();
+                    // }
+                    // , btn2: function () {
+                    //     layer.close();
+                    // }
+
+                    // , zIndex: layer.zIndex //重点1
+                    // , success: function (layero, index) {
+                    //     layer.setTop(layero); //重点2. 保持选中窗口置顶
+
+                    //     //记录索引，以便按 esc 键关闭。事件见代码最末尾处。
+                    //     layer.escIndex = layer.escIndex || [];
+                    //     layer.escIndex.unshift(index);
+                    //     //选中当前层时，将当前层索引放置在首位
+                    //     layero.on('mousedown', function () {
+                    //         var _index = layer.escIndex.indexOf(index);
+                    //         if (_index !== -1) {
+                    //             layer.escIndex.splice(_index, 1); //删除原有索引
+                    //         }
+                    //         layer.escIndex.unshift(index); //将索引插入到数组首位
+                    //     });
+                    // }
+                    // , end: function () {
+                    //     //更新索引
+                    //     if (typeof layer.escIndex === 'object') {
+                    //         layer.escIndex.splice(0, 1);
+                    //     }
+                    // }
+                });
+            }
+        };
+
+        $('#addbooks').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+        $(".yearSelect").change(function(e){
+            window.location = "/books.html?year="+$(this).val()
+        });
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    });
+</script>
+<script src="/static/lib/basicContext/basicContext.min.js" charset="utf-8"></script>
+<script>
+    $(function(){
+        $('.book-item').on("contextmenu",function(e){
+            var id = $(this).attr("data-id")
+           
+            var clicked = function () { 
+                var id = $(this).attr("data-id")
+                var status = $(this).attr("data-status")
+                $.ajax({
+                    url: '/setstatus/books',
+                    type: 'post',
+                    data: "id="+id+"&status="+status,
+                    success: function (data) {
+                        if (data.code == 200) {
+                            window.location.reload()
+                        } else {
+                            alert(data.msg)
+                        }
+                        console.log(data);
+                    }
+                });
+                console.log(id, status)
+             }
+            var items = [
+                { title: '设为在读', fn: clicked, attr: { "id": id, "status": "1" } },
+                { title: '设为已读', fn: clicked, attr: { "id": id, "status": "3" } },
+                { title: '设为想读', fn: clicked, attr: { "id": id, "status": "2" } },
+                { title: '删除', fn: clicked, attr: { "id": id, "status": "0" } },
+            ]
+
+            basicContext.show(items, e.originalEvent)
+        })
+        $("#setLike").click(function(){
+            $.ajax({
+                url: '/like/books',
+                type: 'post',
+                data: "customer_id=" + {{$.Customerid}} ,
+                success: function (data) {
+                    if (data.code == 200) {
+                        console.log(data)
+                        window.location.reload()
+                    } else {
+                        alert(data.msg)
+                    }
+                    console.log(data);
+                }
+            })
+        })
+    })
+</script>

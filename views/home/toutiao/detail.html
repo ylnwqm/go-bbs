@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{$.Data.Title}} - 陈立个人博客</title>
+<meta name="description" content="{{$.Data.Remark}}"/>
+<meta name="keywords" content="{{$.Data.Tag}}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/toutiao/css/base.css" rel="stylesheet">
+<link href="/static/toutiao/css/m.css" rel="stylesheet">
+<script src="/static/toutiao/js/jquery-1.8.3.min.js" ></script>
+<script src="/static/toutiao/js/comm.js"></script>
+<script src="/static/toutiao/js/hc-sticky.js"></script>
+<script src="/static/toutiao/js/aside-sticky.js"></script>
+{{template "home/toutiao/headerscript.html" .}}
+<!--[if lt IE 9]>
+<script src="static/js/modernizr.js"></script>
+<![endif]-->
+</head>
+<body>
+<!--top begin-->
+{{template "home/toutiao/top.html" .}}
+<article>
+
+  {{template "home/toutiao/header.html" .}}
+
+  <div class="box_l">
+    <div class="weizhi">您现在的位置是：<a href="/" title="首页">首页</a>&nbsp;>&nbsp;<a href="/article/category/{{$.Data.Category.Id}}.html" title="{{$.Data.Category.Name}}">{{$.Data.Category.Name}}</a></div>
+    <div class="container">
+      <h1>{{$.Data.Title}}</h1>
+      <div class="info"><span>{{$.Data.Category.Name}}</span><span>作者：{{$.Data.Customer.Username}}</span><span>日期：{{dateformat $.Data.Created "2006-01-02 15:04:05"}}</span><span>点击：{{$.Data.Pv}}</span></div>
+      <div class="content">
+        {{str2html $.Data.Html}}
+      </div>
+      <div class="tags">
+        {{range $key ,$value := $.Tag}}
+        <a href="/search?q={{$value}}" target="_blank">{{$value}}</a>
+        {{end}}
+      </div>
+    </div>
+    <div class="info-pre-next">
+      <!-- <p>上一篇:<a href="/life/7.html">世界上最永恒的幸福就是平凡，人生中最长久的拥有就是珍惜。</a></p> -->
+    </div>
+    <div class="otherlink">
+      <h2 class="news_t">相关文章</h2>
+      <ul>
+        {{range $key ,$vlaue := $.RelevantArticles}}
+        <li><a href="/detail/{{$vlaue.Id}}.html" title="{{$vlaue.Title}}" target="_blank">{{$vlaue.Title}}</a></li>
+      {{end}}
+    </div>
+    <div class="pinglun-box">
+      <h2 class="news_t">文章评论</h2>
+<!-- 评论 开始 -->
+<!-- <div class="pinglun">
+<div class="pl-520am" data-id="12" data-classid="1" data-showhot="0"></div>
+<script type="text/javascript" src="static/js/api.js"></script>
+</div> -->
+<!-- 评论 结束 -->
+    </div>
+  </div>
+  {{template "home/toutiao/right.html" .}}
+</article>
+
+
+<a href="#" title="返回顶部" class="icon-top"></a>
+</body>
+</html>
+<script>
+	$(function(){
+		$.ajax({
+            url:'/pv/{{$.Data.Id}}.html',
+            type:'get',
+            success:function (data) {
+                console.log(data);
+            }
+        });
+	})
+</script>
