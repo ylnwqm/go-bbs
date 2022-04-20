@@ -8,7 +8,7 @@ Go Bbs 是一个基于 Beego 开发的可切换模板的 BBS 社交博客系统�
 http://go-bbs.com/
 
 ## DEMO 
-https://nihongdengxia.com/
+https://nihongdengxia.com/ <br>
 http://clblog.club/
 
 ## 安装
