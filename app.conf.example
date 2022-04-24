@@ -1,7 +1,7 @@
 runmode = prod
 sessionon = true
-url = https://nihongdengxia.com
-view = nihongdengxia
+url = http://127.0.0.1:9090
+view = leechan
 httpport = 9090
 
 EnableAdmin = false
