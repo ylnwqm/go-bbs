@@ -20,12 +20,15 @@ Go Bbs 是一个基于 Beego 开发的可切换模板的 BBS 社交博客系统�
 ## 安装
 1.  把 Go Bbs 项目拉到本地 `git clone https://github.com/gobbscom/go-bbs.git`
 2.  进入项目的根目录下执行 `go build -o go-bbs`
-3.  创建一个配置文件，app.conf 内容如 app.conf.example，配置好环境变量 BEEGO_CONFIG_PATH = '配置文件路径'
+3.  **创建一个配置文件，app.conf 内容如 app.conf.example，配置好环境变量 BEEGO_CONFIG_PATH = '配置文件路径'**
 4.  执行./go-bbs --install 安装数据库
 5.  最后执行 ./go-bbs 访问对应端口即可
 
 > 如果需要启动爬虫任务。在启动的时候 指定 `--t` 为 `true` , 如：`./go-bbs --t ture`
 >  管理后台账号密码：admin , 123456
+
+> 大家遇到问题的时候可以翻翻 Issues 列表，说不定有同学会遇到跟你一样的问题并解决了哦
+
 
 ## GO Bbs 模板有哪些?
 
